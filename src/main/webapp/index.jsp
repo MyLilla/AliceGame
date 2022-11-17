@@ -6,8 +6,8 @@
 <head>
     <meta charset="utf-8">
     <title>AliceGame</title>
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 
 <script src="styles/bootstrap.bundle.min.js"></script>
@@ -32,19 +32,23 @@
     <div class="row text-center">
         <div class="rol-12">
 
-            <h2 class="container text-center colorText"> Ты помнишь истроию про Алису в стране чудес? Это квест о ней
+            <h3 class="container text-center colorText"> Ты помнишь истроию про Алису в стране чудес? Это квест о ней
                 <br> <br> Алиса так же попала в кроличью нору, и теперь ей надо вернуться в Лондон.
                 <br> Но для этого нужно съесть печеньку чтоб уменьшится, победить чудовище и все такое.
-                <br> <br> Добавь свое имя, чтоб сохраниться
-                <br> <br>
-                Твое имя: <input name="name"/></h2>
-            <br><br>
+                <br> <br> Добавь свое имя, чтоб сохраниться <br> <br> </h3>
+
+            <form action="${pageContext.request.contextPath}/init" >
+                <div>
+                    <h3 class="container text-center colorText" for="name">Твое имя: </h3>
+                    <input type="text" id="name" name="name">
+                </div>
+                <br>
             <h4 class="color1 colorText"> Нажми на красную кнопку когда будешь готов </h4>
             <br>
             <div class="text-center btn-lg">
-                <button class="btn startButton" onclick="window.location='<c:url value="/init"/>'"></button>
+                <button type="submit" class="btn startButton"></button>
             </div>
-
+            </form>
         </div>
     </div>
 </section>
@@ -55,8 +59,15 @@
     <div class="row text-center">
         <div class="rol-12">
 
-            <h1 class="container text-center colorText">Ты в первой комнате, отсюда мы можешь пойти в: </h1>
+            <h3 class="container text-center colorText">${user.getName()}, ты в ${user.getActualRoom().getName()}, отсюда мы можешь пойти в:
+                <br>
+            </h3>
 
+            <ul>
+                <c:forEach var="room" items="${user.getActualRoom().getDoor()}">
+                    <h3 class="container text-center colorText" ><c:out value="${room}" /></h3>
+                </c:forEach>
+            </ul>
         </div>
     </div>
 </section>

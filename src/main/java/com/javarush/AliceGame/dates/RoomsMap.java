@@ -7,9 +7,10 @@ import java.util.HashMap;
 @Getter
 public class RoomsMap {
 
-    private HashMap <String, Room> roomsMap;
+    HashMap <String, Room> rooms = createRoomsMap();
+    public HashMap <String, Room> createRoomsMap () {
 
-    public void createRoomsMap () {
+        HashMap <String, Room> roomsMap = new HashMap<>();
 
         Room rabbitHole = new Room("rabbitHole");
         rabbitHole.getDoor().add("mushroomForest");
@@ -47,5 +48,7 @@ public class RoomsMap {
         Room london = new Room("london");
         dungeon.getDoor().add("rabbitHole");
         roomsMap.put(london.getName(), london);
+
+        return roomsMap;
     }
 }
