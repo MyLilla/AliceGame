@@ -6,10 +6,9 @@ import java.util.HashMap;
 
 @Getter
 public class UsersRepository {
-
     private final HashMap<String, User> usersRep = new HashMap<>();
-
     public User addUser (String userName) {
+
         if (usersRep.containsKey(userName)) {
             return usersRep.get(userName);
         } else {
