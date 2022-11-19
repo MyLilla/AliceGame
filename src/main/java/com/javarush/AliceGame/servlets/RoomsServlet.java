@@ -1,8 +1,11 @@
 package com.javarush.AliceGame.servlets;
 
+import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,18 +17,32 @@ import java.util.HashMap;
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
 
+    HashMap<String, Room> rooms;
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ServletContext context = config.getServletContext();
+        rooms = (HashMap<String, Room>) context.getAttribute("RoomsMap");
+    }
     @Override
     protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute("user");
-        Room actualRoom = user.getActualRoom();
 
-        HashMap<String, Room> rooms = (HashMap<String, Room>) request.getSession().getAttribute("rooms");
-
+        Room actualRoom;
         String nextRoom = request.getParameter("nextRoom");
-        Room newRoom = rooms.get(nextRoom);
-        user.setActualRoom(newRoom);
+        if (nextRoom == null) {
+            actualRoom = rooms.get("rabbitHole");
+        } else {
+            actualRoom = rooms.get(nextRoom);
+        }
+        Personage personage = rooms.get(actualRoom.getName()).getPersonage();
+
+        user.setActualRoom(actualRoom.getName());
+
         request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("actualRoom", actualRoom);
+        request.setAttribute("personage",personage);
 
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }

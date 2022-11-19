@@ -19,5 +19,4 @@ public class IndexServlet extends HttpServlet {
 
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
-
 }

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 
-<script src="styles/bootstrap.bundle.min.js"></script>
+<script src="../styles/bootstrap.bundle.min.js"></script>
 
 <header>
     <div class="container">
@@ -26,7 +26,7 @@
 
 <body>
 
-<!--Предистория-->
+<!--History-->
 <c:if test="${user == null}">
 <section id="preview">
     <div class="row text-center">
@@ -35,12 +35,13 @@
             <h3 class="container text-center colorText"> Ты помнишь истроию про Алису в стране чудес? Это квест о ней
                 <br> <br> Алиса так же попала в кроличью нору, и теперь ей надо вернуться в Лондон.
                 <br> Но для этого нужно съесть печеньку чтоб уменьшится, победить чудовище и все такое.
-                <br> <br> Добавь свое имя, чтоб сохраниться <br> <br> </h3>
+                <br> <br> Добавь свое имя, чтоб сохраниться: <br> <br> </h3>
 
-            <form action="${pageContext.request.contextPath}/init" >
+            <form action="${pageContext.request.contextPath}/init">
                 <div>
-                    <h3 class="container text-center colorText" for="name">Твое имя: </h3>
+                    <label for="name"></label>
                     <input type="text" id="name" name="name">
+                    <div id="nameHelp" class="form-text colorText">И придумай что-то поригинальней</div>
                 </div>
                 <br>
             <h4 class="color1 colorText"> Нажми на красную кнопку когда будешь готов </h4>
@@ -54,20 +55,50 @@
 </section>
 </c:if>
 
+<!--Steps-->
 <c:if test="${user != null}">
 <section id="game">
     <div class="row text-center">
         <div class="rol-12">
 
-            <h3 class="container text-center colorText">${user.getName()}, ты в ${user.getActualRoom().getName()}, отсюда мы можешь пойти в:
-                <br>
-            </h3>
-
+            <h3 class="container text-center colorText">${user.getName()}, ты в ${user.getActualRoom()},
+                отсюда мы можешь пойти в: </h3>
+            <br>
             <ul>
-                <c:forEach var="room" items="${user.getActualRoom().getDoor()}">
-                    <h3 class="container text-center colorText" ><c:out value="${room}" /></h3>
+                <c:forEach var="room" items="${actualRoom.getDoor()}">
+
+                    <form action="${pageContext.request.contextPath}/rooms" >
+                        <div class="text-center btn-lg">
+                            <input type="hidden" name="nextRoom" value="${room}">
+                            <button type="submit" class="btn nextButton">${room}</button>
+                        </div>
+                    </form>
+
                 </c:forEach>
             </ul>
+
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="rol-12">
+
+            <h3 class="container text-center colorText">На локации с тобой ${personage.getName()}</h3>
+            <br>
+
+                <div class="container text-center">
+                    <div class="row">
+                        <form action="${pageContext.request.contextPath}/dialog" >
+                            <div class="text-center btn-lg">
+                                <input type="hidden" name="personage" value="${personage}">
+                        <button type="submit"  class="btn nextButton">
+                            Поговорить с ${personage.getName()}
+                        </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
         </div>
     </div>
 </section>

@@ -4,17 +4,22 @@ package com.javarush.AliceGame.dates;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 public class Room {
-    private Integer id;
-    private String name;
-    private ArrayList<String> door;
 
-    public Room(Integer id, String name) {
-        this.id = id;
+    private String name;
+    private List<String> door = new ArrayList<>();
+    private Personage personage;
+   // private List<String> invents = new ArrayList<>();
+
+    public Room(String name) {
         this.name = name;
-        this.door = new ArrayList<>();
     }
-}
+
+    }
+
+
+

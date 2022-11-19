@@ -1,21 +1,24 @@
 package com.javarush.AliceGame;
 
-import com.javarush.AliceGame.dates.RoomsMap;
+import com.javarush.AliceGame.dates.GameMap;
+import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.UsersRepository;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.HashMap;
 
-//@WebListener
+@WebListener
 public class AppContextListener implements ServletContextListener {
-
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
-        context.setAttribute("RoomsMap", new RoomsMap().getRooms());
-        context.setAttribute("UsersRepo", new UsersRepository().getUsersRep());
+        GameMap gameMap = new GameMap();
+        HashMap<String, Room> roomsMap = gameMap.createRoomsMap();
+       context.setAttribute("RoomsMap", roomsMap);
+        context.setAttribute("UsersRepository", new UsersRepository());
     }
 
     @Override
