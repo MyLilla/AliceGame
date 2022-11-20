@@ -108,12 +108,12 @@
             <h3 class="container text-center colorText">Еще тут есть предметы: </h3>
             <br>
             <ul>
-                <c:forEach var="room" items="${actualRoom.getDoor()}">
+                <c:forEach var="invent" items="${actualRoom.getInvents()}">
 
                     <form action="${pageContext.request.contextPath}/rooms" >
                         <div class="text-center btn-lg">
-                            <input type="hidden" name="nextRoom" value="${room}">
-                            <button type="submit" class="btn nextButton">${room}</button>
+                            <input type="hidden" name="nextRoom" value="${invent}">
+                            <button type="submit" class="btn nextButton">${invent}</button>
                         </div>
                     </form>
 

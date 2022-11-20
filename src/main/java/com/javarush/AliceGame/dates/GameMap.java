@@ -4,22 +4,25 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class GameMap {
 
-    public HashMap <String, Room> createRoomsMap () {
+    ArrayList<Personage> personages = createPersonsList();
 
-        HashMap <String, Room> roomsMap = new HashMap<>();
-        ArrayList<Personage> personages = createPersesList();
+    public HashMap<String, Room> createRoomsMap() {
 
+        HashMap<String, Room> roomsMap = new HashMap<>();
 
         Room rabbitHole = new Room("rabbitHole");
         rabbitHole.setPersonage(personages.get(0));
         rabbitHole.getDoor().add("mushroomForest");
+        rabbitHole.getInvents().add(Invent.builder().id(1).name("elexir").build());
         roomsMap.put(rabbitHole.getName(), rabbitHole);
 
-        Room mushroomForest = new Room( "mushroomForest");
+        Room mushroomForest = new Room("mushroomForest");
         mushroomForest.getDoor().add("hatterHome");
         mushroomForest.getDoor().add("caterpillarArea");
         roomsMap.put(mushroomForest.getName(), mushroomForest);
@@ -28,16 +31,41 @@ public class GameMap {
         return roomsMap;
     }
 
-    private ArrayList<Personage> createPersesList() {
+    private ArrayList<Personage> createPersonsList() {
         ArrayList<Personage> list = new ArrayList<>();
 
-        Personage rabbit = new  Personage (0, "whiteRabbit", "rabbis says");
+        HashMap<String, Dialog> personsDialogs = createDialogMap();
 
-        list.add(rabbit.getId(), rabbit);
+        list.add(Personage.builder()
+                .name("whiteRabbit")
+                .text("rabbis says")
+                .dialog(personsDialogs.get("whiteRabbit"))
+                .build());
+
+        list.add(Personage.builder()
+                .name("cat")
+                .text("catSays")
+                .build());
+
         return list;
     }
 
+    private HashMap<String, Dialog> createDialogMap() {
 
+        HashMap<String, Dialog> personsDialogs = new HashMap<>();
+
+        Dialog rabbitDialog = new Dialog();
+
+        Dialog.Question firstQuestion = new Dialog.Question(1, "Question 1");
+        rabbitDialog.getQuestions().add(firstQuestion);
+
+        Dialog.Answer answerOne = new Dialog.Answer("ответ 1", 2);
+        rabbitDialog.getAnswers().add(answerOne);
+
+        personsDialogs.put("whiteRabbit", rabbitDialog);
+
+        return personsDialogs;
+    }
 
 //
 ////        Room mushroomForest = Room.builder()
@@ -75,9 +103,6 @@ public class GameMap {
 ////            Room london = new Room("london");
 ////            london.getDoor().add("rabbitHole");
 ////            roomsMap.put(london.getName(), london);
-//
-//        return roomsMap;
-//    }
-//
+
 
 }
