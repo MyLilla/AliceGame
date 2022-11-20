@@ -13,15 +13,36 @@
 <script src="../styles/bootstrap.bundle.min.js"></script>
 
 <header>
-    <div class="container">
-        <div class="row">
-            <div class="rol-12">
-                <h1 class="text-center colorRed">
-                    AliceGame
-                </h1>
+
+       <div class="container">
+          <div class="row">
+
+              <div class="col-xl-8">
+                  <h1 class="text-center colorRed">AliceGame</h1>
+              </div>
+
+            <div class="col-xl-4">
+                <button type="button" class="btn nextButton" data-bs-toggle="modal" data-bs-target="#mapModal">
+                    GameMap
+                </button>
             </div>
+
+                <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${pageContext.request.contextPath}/img/map.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
         </div>
     </div>
+
 </header>
 
 <body>
@@ -41,7 +62,7 @@
                 <div>
                     <label for="name"></label>
                     <input type="text" id="name" name="name">
-                    <div id="nameHelp" class="form-text colorText">И придумай что-то поригинальней</div>
+                    <div id="nameHelp" class="form-text colorText">придумай что-то поригинальней</div>
                 </div>
                 <br>
             <h4 class="color1 colorText"> Нажми на красную кнопку когда будешь готов </h4>
@@ -64,7 +85,7 @@
             <h3 class="container text-center colorText">${user.getName()}, ты в ${user.getActualRoom()},
                 отсюда мы можешь пойти в: </h3>
             <br>
-            <ul>
+            <div class="btn-group" role="group" aria-label="Basic example">
                 <c:forEach var="room" items="${actualRoom.getDoor()}">
 
                     <form action="${pageContext.request.contextPath}/rooms" >
@@ -75,8 +96,7 @@
                     </form>
 
                 </c:forEach>
-            </ul>
-
+                </div>
         </div>
     </div>
 
@@ -110,10 +130,10 @@
             <ul>
                 <c:forEach var="invent" items="${actualRoom.getInvents()}">
 
-                    <form action="${pageContext.request.contextPath}/rooms" >
+                    <form action="${pageContext.request.contextPath}/rooms" method="post">
                         <div class="text-center btn-lg">
-                            <input type="hidden" name="nextRoom" value="${invent}">
-                            <button type="submit" class="btn nextButton">${invent}</button>
+                            <input type="hidden" name="getInvent" value="${invent}">
+                            <button type="submit" class="btn nextButton">Подобрать: ${invent}</button>
                         </div>
                     </form>
 

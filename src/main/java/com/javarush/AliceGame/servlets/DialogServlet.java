@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 @WebServlet (name="DialogServlet", value = "/dialog")
 public class DialogServlet extends HttpServlet {
@@ -22,23 +21,31 @@ public class DialogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Room room = (Room) request.getSession().getAttribute("actualRoom");
-        Personage personage = room.getPersonage();
-        Dialog dialog = personage.getDialog();
+        Dialog dialog = room.getPersonage().getDialog();
+
+        List<Dialog.Question> questions = dialog.getQuestions();  // лист вопросов
 
         String textQuestion;
+        List<Dialog.Answer> answers;
+
         String nextQuestion = request.getParameter("nextQuestion");
+
         if (nextQuestion == null) {
-            textQuestion = dialog.getQuestions().get(0).getText();
+            textQuestion = questions.get(0).getText();
+            answers = questions.get(0).getAnswers();
         } else {
             Integer nextQuestionId = Integer.parseInt(nextQuestion);
-            textQuestion = dialog.getQuestions().get(nextQuestionId).getText();
+            if (nextQuestionId == 2) {
+
+                getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+            }
+            textQuestion = questions.get(nextQuestionId).getText();
+            answers = questions.get(nextQuestionId).getAnswers();
         }
 
-            request.setAttribute("room", room.getName());
-            request.setAttribute("personage", personage);
-            request.setAttribute("dialog", dialog);
-            request.setAttribute("textQuestion", textQuestion);
-
+        request.setAttribute("room", room.getName());
+        request.setAttribute("answers", answers);
+        request.setAttribute("textQuestion", textQuestion);
 
         getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
     }

@@ -33,7 +33,8 @@
 
                         <h1 class="container text-center colorText">первый вопрос: ${textQuestion}</h1>
                     <ul>
-                        <c:forEach var="answer" items="${dialog.getAnswers()}">
+
+                        <c:forEach var="answer" items="${answers}">
 
                             <form action="${pageContext.request.contextPath}/dialog" >
                                 <div class="text-center btn-lg">

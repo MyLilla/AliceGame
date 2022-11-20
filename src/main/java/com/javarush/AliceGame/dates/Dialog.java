@@ -14,13 +14,13 @@ import java.util.Queue;
 public class Dialog {
 
     private List<Question> questions;
-    private List<Answer> answers;
 
     @Data
     @Builder
     public static class Question {
         Integer id;
         String text;
+        private List<Answer> answers;
     }
     @Data
     @Builder

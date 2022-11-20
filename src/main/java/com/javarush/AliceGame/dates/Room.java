@@ -14,7 +14,7 @@ public class Room {
     private String name;
     private List<String> door = new ArrayList<>();
     private Personage personage;
-    private List<Invent> invents = new ArrayList<>();
+    private List<String> invents = new ArrayList<>();
 
 }
 

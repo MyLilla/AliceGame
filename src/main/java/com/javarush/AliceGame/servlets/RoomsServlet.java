@@ -42,7 +42,20 @@ public class RoomsServlet extends HttpServlet {
 
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("actualRoom", actualRoom);
-        request.setAttribute("personage",personage);
+        request.getSession().setAttribute("personage",personage);
+
+        getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        User user = (User) request.getSession().getAttribute("user");
+
+        String invent = request.getParameter("getInvent");
+        if (!(user.getInvents().contains(invent))) {
+            user.getInvents().add(invent);
+        }
 
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }

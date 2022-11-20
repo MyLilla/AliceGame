@@ -11,6 +11,6 @@ public class User {
 
     private String name;
     private String actualRoom;
-   //private ArrayList<Invent> invents;
+    private ArrayList<String> invents = new ArrayList<>();
 
 }
