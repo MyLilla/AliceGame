@@ -101,6 +101,28 @@
 
         </div>
     </div>
+
+    <div class="row text-center">
+        <div class="rol-12">
+
+            <h3 class="container text-center colorText">Еще тут есть предметы: </h3>
+            <br>
+            <ul>
+                <c:forEach var="room" items="${actualRoom.getDoor()}">
+
+                    <form action="${pageContext.request.contextPath}/rooms" >
+                        <div class="text-center btn-lg">
+                            <input type="hidden" name="nextRoom" value="${room}">
+                            <button type="submit" class="btn nextButton">${room}</button>
+                        </div>
+                    </form>
+
+                </c:forEach>
+            </ul>
+
+        </div>
+    </div>
+
 </section>
 </c:if>
 

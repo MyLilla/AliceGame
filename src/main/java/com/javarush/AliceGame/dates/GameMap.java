@@ -13,6 +13,7 @@ public class GameMap {
         HashMap <String, Room> roomsMap = new HashMap<>();
         ArrayList<Personage> personages = createPersesList();
 
+
         Room rabbitHole = new Room("rabbitHole");
         rabbitHole.setPersonage(personages.get(0));
         rabbitHole.getDoor().add("mushroomForest");
@@ -35,6 +36,8 @@ public class GameMap {
         list.add(rabbit.getId(), rabbit);
         return list;
     }
+
+
 
 //
 ////        Room mushroomForest = Room.builder()

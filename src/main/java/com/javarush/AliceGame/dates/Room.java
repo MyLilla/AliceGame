@@ -13,7 +13,7 @@ public class Room {
     private String name;
     private List<String> door = new ArrayList<>();
     private Personage personage;
-   // private List<String> invents = new ArrayList<>();
+    private List<String> invents = new ArrayList<>();
 
     public Room(String name) {
         this.name = name;
