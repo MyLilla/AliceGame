@@ -31,7 +31,7 @@
         <div class="row text-center">
             <div class="rol-12">
 
-                        <h1 class="container text-center colorText">первый вопрос: ${dialog}</h1>
+                        <h1 class="container text-center colorText">первый вопрос: ${textQuestion}</h1>
                     <ul>
                         <c:forEach var="answer" items="${dialog.getAnswers()}">
 

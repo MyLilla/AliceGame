@@ -1,33 +1,32 @@
 package com.javarush.AliceGame.dates;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Queue;
 
 @Getter
 @Setter
+@Builder
 public class Dialog {
 
-    private ArrayList<Question> questions = new ArrayList<>();
-    private ArrayList <Answer> answers = new ArrayList<>();
+    private List<Question> questions;
+    private List<Answer> answers;
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
+    @Data
+    @Builder
     public static class Question {
         Integer id;
         String text;
     }
-    @Getter
-    @Setter
-    @AllArgsConstructor
+    @Data
+    @Builder
     public static class Answer {
         String text;
         Integer nextQuestion;
     }
+
 }

@@ -6,8 +6,9 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@Builder
 public class Room {
 
     private String name;
@@ -15,11 +16,7 @@ public class Room {
     private Personage personage;
     private List<Invent> invents = new ArrayList<>();
 
-    public Room(String name) {
-        this.name = name;
-    }
-
-    }
+}
 
 
 

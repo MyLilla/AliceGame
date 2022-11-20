@@ -1,10 +1,7 @@
 package com.javarush.AliceGame.dates;
 
-
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.ArrayList;
 
 
 @Data

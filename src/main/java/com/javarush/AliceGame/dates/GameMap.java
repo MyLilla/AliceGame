@@ -5,28 +5,72 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class GameMap {
-
     ArrayList<Personage> personages = createPersonsList();
-
     public HashMap<String, Room> createRoomsMap() {
 
         HashMap<String, Room> roomsMap = new HashMap<>();
 
-        Room rabbitHole = new Room("rabbitHole");
-        rabbitHole.setPersonage(personages.get(0));
-        rabbitHole.getDoor().add("mushroomForest");
-        rabbitHole.getInvents().add(Invent.builder().id(1).name("elexir").build());
+        Room rabbitHole = Room.builder()
+                .name("rabbitHole")
+                .personage(personages.get(1))
+                .invents(List.of(Invent.builder().id(1).name("elexir").build()))
+                .door(List.of("mushroomForest"))
+                .build();
         roomsMap.put(rabbitHole.getName(), rabbitHole);
 
-        Room mushroomForest = new Room("mushroomForest");
-        mushroomForest.getDoor().add("hatterHome");
-        mushroomForest.getDoor().add("caterpillarArea");
+        Room mushroomForest = Room.builder()
+                .name("mushroomForest")
+                .invents(List.of(Invent.builder().id(2).name("mushroom").build()))
+                .personage(personages.get(2))
+                .door(List.of("hatterHome", "caterpillarArea"))
+                .build();
         roomsMap.put(mushroomForest.getName(), mushroomForest);
 
+            Room caterpillarArea = Room.builder()
+                    .name("caterpillarArea")
+                    .personage(personages.get(0))
+                    .door(List.of("mushroomForest"))
+                    .build();
+            roomsMap.put(caterpillarArea.getName(), caterpillarArea);
+
+        Room hatterHome = Room.builder()
+                .name("hatterHome")
+                .personage(personages.get(0))
+                .door(List.of("mushroomForest", "redKingdom", "whiteKingdom"))
+                .build();
+            roomsMap.put(hatterHome.getName(), hatterHome);
+
+        Room redKingdom = Room.builder()
+                .name("redKingdom")
+                .personage(personages.get(0))
+                .door(List.of("dungeon", "hatterHome"))
+                .build();
+            roomsMap.put(redKingdom.getName(), redKingdom);
+
+        Room dungeon = Room.builder()
+                .name("dungeon")
+                .personage(personages.get(0))
+                .door(List.of("redKingdom"))
+                .build();
+            roomsMap.put(dungeon.getName(), dungeon);
+
+        Room whiteKingdom = Room.builder()
+                .name("whiteKingdom")
+                .personage(personages.get(0))
+                .door(List.of("london", "hatterHome"))
+                .build();
+            roomsMap.put(whiteKingdom.getName(), whiteKingdom);
+
+
+        Room london = Room.builder()
+                .name("london")
+                .personage(personages.get(0))
+                .door(List.of("rabbitHole"))
+                .build();
+            roomsMap.put(london.getName(), london);
 
         return roomsMap;
     }
@@ -36,6 +80,10 @@ public class GameMap {
 
         HashMap<String, Dialog> personsDialogs = createDialogMap();
 
+        list.add(Personage.builder()
+                        .name("null")
+                        .text("null")
+                .build());
         list.add(Personage.builder()
                 .name("whiteRabbit")
                 .text("rabbis says")
@@ -54,55 +102,21 @@ public class GameMap {
 
         HashMap<String, Dialog> personsDialogs = new HashMap<>();
 
-        Dialog rabbitDialog = new Dialog();
-
-        Dialog.Question firstQuestion = new Dialog.Question(1, "Question 1");
-        rabbitDialog.getQuestions().add(firstQuestion);
-
-        Dialog.Answer answerOne = new Dialog.Answer("ответ 1", 2);
-        rabbitDialog.getAnswers().add(answerOne);
+        Dialog rabbitDialog = Dialog.builder()
+                .questions(List.of(Dialog.Question.builder()
+                        .id(0)
+                        .text("Кролик говорит, о правилах, и что надо выпить зелье")
+                        .build()))
+                .answers(List.of(Dialog.Answer.builder()
+                        .text("выпить").
+                        nextQuestion(0).build(),
+                        Dialog.Answer.builder()
+                                .text("не выпить").
+                                nextQuestion(1).build()))
+                .build();
 
         personsDialogs.put("whiteRabbit", rabbitDialog);
 
         return personsDialogs;
     }
-
-//
-////        Room mushroomForest = Room.builder()
-////                .name("mushroomForest")
-////                .door(List.of("hatterHome", "caterpillarArea"))
-////                .invents(List.of("mushroom"))
-////                .personage(new Personage("Cat"))
-////                .build();
-////        roomsMap.put(mushroomForest.getName(), mushroomForest);
-//
-////            Room caterpillarArea = new Room("caterpillarArea");
-////            caterpillarArea.getDoor().add("mushroomForest");
-////            roomsMap.put(caterpillarArea.getName(), caterpillarArea);
-////
-////            Room hatterHome = new Room("hatterHome");
-////            hatterHome.getDoor().add("mushroomForest");
-////            hatterHome.getDoor().add("redKingdom");
-////            hatterHome.getDoor().add("whiteKingdom");
-////            roomsMap.put(hatterHome.getName(), hatterHome);
-////
-////            Room redKingdom = new Room("redKingdom");
-////            redKingdom.getDoor().add("dungeon");
-////            redKingdom.getDoor().add("hatterHome");
-////            roomsMap.put(redKingdom.getName(), redKingdom);
-////
-////            Room dungeon = new Room("dungeon");
-////            dungeon.getDoor().add("redKingdom");
-////            roomsMap.put(dungeon.getName(), dungeon);
-////
-////            Room whiteKingdom = new Room("whiteKingdom");
-////            whiteKingdom.getDoor().add("london");
-////            whiteKingdom.getDoor().add("hatterHome");
-////            roomsMap.put(whiteKingdom.getName(), whiteKingdom);
-////
-////            Room london = new Room("london");
-////            london.getDoor().add("rabbitHole");
-////            roomsMap.put(london.getName(), london);
-
-
 }
