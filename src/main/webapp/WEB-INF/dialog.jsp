@@ -6,34 +6,24 @@
 <head>
     <meta charset="utf-8">
     <title>AliceGame</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 
-<script src="../styles/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/styles/bootstrap.bundle.js"></script>
 
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="rol-12">
-                <h1 class="text-center colorRed">
-                    AliceGame
-                </h1>
-            </div>
-        </div>
-    </div>
-</header>
+<jsp:include page="gameInfo.jsp" />
 
 <body>
 
-    <section id="">
-
         <div class="row text-center">
-            <div class="rol-12">
+            <div class="col-5">
+                <img src="${pageContext.request.contextPath}/${personage.getImgPath()}">
+            </div>
+            <div class="col-7">
 
-                        <h1 class="container text-center colorText">первый вопрос: ${textQuestion}</h1>
+                        <h1 class="container text-center colorText">${textQuestion}</h1>
                     <ul>
-
                         <c:forEach var="answer" items="${answers}">
 
                             <form action="${pageContext.request.contextPath}/dialog" >
@@ -48,7 +38,5 @@
 
             </div>
         </div>
-
-    </section>
 
 </body>

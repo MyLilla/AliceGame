@@ -10,40 +10,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 
-<script src="../styles/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/styles/bootstrap.bundle.min.js"></script>
 
-<header>
-
-       <div class="container">
-          <div class="row">
-
-              <div class="col-xl-8">
-                  <h1 class="text-center colorRed">AliceGame</h1>
-              </div>
-
-            <div class="col-xl-4">
-                <button type="button" class="btn nextButton" data-bs-toggle="modal" data-bs-target="#mapModal">
-                    GameMap
-                </button>
-            </div>
-
-                <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="${pageContext.request.contextPath}/img/map.png">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        </div>
-    </div>
-
-</header>
+<jsp:include page="gameInfo.jsp" />
 
 <body>
 
@@ -80,66 +49,77 @@
 <c:if test="${user != null}">
 <section id="game">
     <div class="row text-center">
-        <div class="rol-12">
+        <div class="col-3">
 
-            <h3 class="container text-center colorText">${user.getName()}, ты в ${user.getActualRoom()},
-                отсюда мы можешь пойти в: </h3>
+            <h3 class="container text-center colorText">Speak with:</h3>
+            <br>
+
+            <div class="container text-center">
+                <div class="row">
+                    <form action="${pageContext.request.contextPath}/dialog" >
+                        <div class="text-center btn-lg">
+                            <input type="hidden" name="personage" value="${personage}">
+                            <button type="submit"  class="btn nextButton">
+                               ${personage.getName()}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <h3 class="container text-center colorText"></h3>
+            <br>
+
+                <c:forEach var="invent" items="${actualRoom.getInvents()}">
+
+                    <form action="${pageContext.request.contextPath}/rooms" method="post">
+                        <div class="text-center btn-lg">
+                            <c:if test="${!user.getInvents().contains(invent)}">
+                                <c:if test="${!user.getUsedInvents().contains(invent)}">
+                                <input type="hidden" name="getInvent" value="${invent}">
+                                <button type="submit" class="btn nextButton">Pick up invent</button>
+                            </c:if>
+                            </c:if>
+                        </div>
+                    </form>
+                </c:forEach>
+
+        </div>
+
+        <div class="col-6">
+
+            <h3 class="container text-center colorText">Your actual location: ${user.getActualRoom()},
+                you can go to: </h3>
             <br>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <c:forEach var="room" items="${actualRoom.getDoor()}">
 
                     <form action="${pageContext.request.contextPath}/rooms" >
+                        <c:if test="${openedRoom || actualRoom.getOpenedDoors().contains(room)}">
                         <div class="text-center btn-lg">
                             <input type="hidden" name="nextRoom" value="${room}">
                             <button type="submit" class="btn nextButton">${room}</button>
                         </div>
+                        </c:if>
                     </form>
 
                 </c:forEach>
                 </div>
         </div>
-    </div>
+        <div class="col-3">
+            <h3 class="container text-center colorText">Your invents: </h3>
 
-    <div class="row text-center">
-        <div class="rol-12">
-
-            <h3 class="container text-center colorText">На локации с тобой ${personage.getName()}</h3>
-            <br>
-
-                <div class="container text-center">
-                    <div class="row">
-                        <form action="${pageContext.request.contextPath}/dialog" >
-                            <div class="text-center btn-lg">
-                                <input type="hidden" name="personage" value="${personage}">
-                        <button type="submit"  class="btn nextButton">
-                            Поговорить с ${personage.getName()}
-                        </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-        </div>
-    </div>
-
-    <div class="row text-center">
-        <div class="rol-12">
-
-            <h3 class="container text-center colorText">Еще тут есть предметы: </h3>
             <br>
             <ul>
-                <c:forEach var="invent" items="${actualRoom.getInvents()}">
-
-                    <form action="${pageContext.request.contextPath}/rooms" method="post">
+                <c:forEach var="invent" items="${user.getInvents()}">
+                    <form action="${pageContext.request.contextPath}/rooms" method="post" >
                         <div class="text-center btn-lg">
                             <input type="hidden" name="getInvent" value="${invent}">
-                            <button type="submit" class="btn nextButton">Подобрать: ${invent}</button>
+                            <button class="btn nextButton">${invent}</button>
                         </div>
                     </form>
-
                 </c:forEach>
             </ul>
-
         </div>
     </div>
 

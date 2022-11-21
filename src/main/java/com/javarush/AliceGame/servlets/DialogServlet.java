@@ -35,12 +35,16 @@ public class DialogServlet extends HttpServlet {
             answers = questions.get(0).getAnswers();
         } else {
             Integer nextQuestionId = Integer.parseInt(nextQuestion);
-            if (nextQuestionId == 2) {
+            if (nextQuestionId == questions.size()) {
+
+//                Personage personage = (Personage) request.getSession().getAttribute("personage");
+//                personage.setFinishDialog(true);
+//                request.getSession().setAttribute("personage", personage);
 
                 getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
             }
-            textQuestion = questions.get(nextQuestionId).getText();
             answers = questions.get(nextQuestionId).getAnswers();
+            textQuestion = questions.get(nextQuestionId).getText();
         }
 
         request.setAttribute("room", room.getName());

@@ -3,10 +3,7 @@ package com.javarush.AliceGame.dates;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Queue;
 
 @Getter
 @Setter

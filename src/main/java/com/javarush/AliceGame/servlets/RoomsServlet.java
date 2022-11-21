@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
@@ -36,13 +37,14 @@ public class RoomsServlet extends HttpServlet {
         } else {
             actualRoom = rooms.get(nextRoom);
         }
-        Personage personage = rooms.get(actualRoom.getName()).getPersonage();
 
+        Personage personage = rooms.get(actualRoom.getName()).getPersonage();
         user.setActualRoom(actualRoom.getName());
 
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("actualRoom", actualRoom);
         request.getSession().setAttribute("personage",personage);
+
 
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
@@ -51,12 +53,18 @@ public class RoomsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute("user");
-
         String invent = request.getParameter("getInvent");
+
         if (!(user.getInvents().contains(invent))) {
             user.getInvents().add(invent);
-        }
+        } else {
+            String openedInvent = rooms.get(user.getActualRoom()).getOpenedInvent();
+            boolean openedRoom = user.getInvents().contains(rooms.get(user.getActualRoom()).getOpenedInvent());
+            request.getSession().setAttribute("openedRoom", openedRoom);
+            user.getInvents().remove(invent);
+            user.getUsedInvents().add(invent);
 
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }

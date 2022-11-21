@@ -9,7 +9,7 @@ import lombok.Data;
 public class Personage {
 
     private String name;
-    private String text;
-    // private String imgPath;
+    private String imgPath;
     private Dialog dialog;
+
 }

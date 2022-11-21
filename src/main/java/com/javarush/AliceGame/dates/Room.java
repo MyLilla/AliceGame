@@ -1,9 +1,7 @@
 package com.javarush.AliceGame.dates;
 
-
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,11 +10,9 @@ import java.util.List;
 public class Room {
 
     private String name;
-    private List<String> door = new ArrayList<>();
+    private List<String> door;
     private Personage personage;
-    private List<String> invents = new ArrayList<>();
-
+    private List<String> invents;
+    private String openedInvent;
+    private List<String> openedDoors;
 }
-
-
-
