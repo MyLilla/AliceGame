@@ -37,10 +37,6 @@ public class DialogServlet extends HttpServlet {
             Integer nextQuestionId = Integer.parseInt(nextQuestion);
             if (nextQuestionId == questions.size()) {
 
-//                Personage personage = (Personage) request.getSession().getAttribute("personage");
-//                personage.setFinishDialog(true);
-//                request.getSession().setAttribute("personage", personage);
-
                 getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
             }
             answers = questions.get(nextQuestionId).getAnswers();

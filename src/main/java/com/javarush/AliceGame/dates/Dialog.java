@@ -1,8 +1,6 @@
 package com.javarush.AliceGame.dates;
 
-
 import lombok.*;
-
 import java.util.List;
 
 @Getter
@@ -19,11 +17,11 @@ public class Dialog {
         String text;
         private List<Answer> answers;
     }
+
     @Data
     @Builder
     public static class Answer {
         String text;
         Integer nextQuestion;
     }
-
 }

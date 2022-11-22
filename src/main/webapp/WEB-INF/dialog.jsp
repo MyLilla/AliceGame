@@ -12,32 +12,32 @@
 
 <script src="${pageContext.request.contextPath}/styles/bootstrap.bundle.js"></script>
 
-<jsp:include page="gameInfo.jsp" />
+<jsp:include page="gameInfo.jsp"/>
 
 <body>
 
-        <div class="row text-center">
-            <div class="col-5">
-                <img src="${pageContext.request.contextPath}/${personage.getImgPath()}" class="img-fluid">
-            </div>
-            <div class="col-7">
+<div class="row text-center">
+    <div class="col-5">
+        <img src="${pageContext.request.contextPath}/${personage.getImgPath()}" width="260" height="480">
+    </div>
+    <div class="col-7">
 
-                <br><br>
-                        <h1 class="container text-center colorText">${textQuestion}</h1>
-                    <ul>
-                        <c:forEach var="answer" items="${answers}">
+        <br><br>
+        <h1 class="container text-center colorText">${textQuestion}</h1>
+        <ul>
+            <c:forEach var="answer" items="${answers}">
 
-                            <form action="${pageContext.request.contextPath}/dialog" >
-                                <div class="text-center btn-lg">
-                                    <input type="hidden" name="nextQuestion" value="${answer.getNextQuestion()}">
-                                    <button type="submit" class="btn nextButton">${answer.getText()}</button>
-                                </div>
-                            </form>
+                <form action="${pageContext.request.contextPath}/dialog">
+                    <div class="text-center btn-lg">
+                        <input type="hidden" name="nextQuestion" value="${answer.getNextQuestion()}">
+                        <button type="submit" class="btn nextButton">${answer.getText()}</button>
+                    </div>
+                </form>
 
-                        </c:forEach>
-                </ul>
+            </c:forEach>
+        </ul>
 
-            </div>
-        </div>
+    </div>
+</div>
 
 </body>
