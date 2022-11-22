@@ -93,13 +93,13 @@ public class GameMap {
         list.add(Personage.builder()
                 .id(0)
                 .name("whiteRabbit")
-                .imgPath("img/rabbit.png")
+                .imgPath("img/rabbit.png\" width=\"300\" height=\"500")
                 .dialog(personsDialogs.get(0)).build());
 
         list.add(Personage.builder()
                 .id(1)
                 .name("cat")
-                .imgPath("img/cat.png")
+                .imgPath("img/cat.png\" width=\"300\" height=\"500")
                 .dialog(personsDialogs.get(1)).build());
 
         list.add(Personage.builder()
