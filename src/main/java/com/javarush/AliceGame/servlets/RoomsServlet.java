@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
@@ -58,12 +59,19 @@ public class RoomsServlet extends HttpServlet {
         if (!(user.getInvents().contains(invent))) {
             user.getInvents().add(invent);
         } else {
-            String openedInvent = rooms.get(user.getActualRoom()).getOpenedInvent();
-            boolean openedRoom = user.getInvents().contains(rooms.get(user.getActualRoom()).getOpenedInvent());
-            request.getSession().setAttribute("openedRoom", openedRoom);
             user.getInvents().remove(invent);
             user.getUsedInvents().add(invent);
+            String actualRoom = user.getActualRoom();
+            // если инвентарь является открывающим в текущей комнате,
+            // пройтись по комнатам, если декущий инвентарь является открывающим
 
+            for (Map.Entry<String, Room> room : rooms.entrySet()) {
+                if (room.getValue().getOpenedInvent().equals(invent) ){
+                    user.getOpenedDoors().addAll(rooms.get(room.getKey()).getDoor());
+                    break;
+                }
+            }
+            // то добавить недоставющую следующую комнату к открытым
         }
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }

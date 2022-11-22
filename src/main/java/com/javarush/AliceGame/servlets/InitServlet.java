@@ -36,6 +36,10 @@ public class InitServlet extends HttpServlet {
         User user = usersRepository.addUser(request.getParameter("name"));
         if (user.getActualRoom() == null) {
             user.setActualRoom("rabbitHole");
+            user.getUsedInvents().add("");
+            user.getOpenedDoors().add("hatterHome");
+            user.getOpenedDoors().add("redKingdom");
+
         }
         session.setAttribute("user", user);
 

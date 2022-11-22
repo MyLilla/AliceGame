@@ -13,4 +13,5 @@ public class User {
     private String actualRoom;
     private ArrayList<String> invents = new ArrayList<>();
     private ArrayList<String> usedInvents = new ArrayList<>();
+    private ArrayList<String> openedDoors = new ArrayList<>();
 }

@@ -88,17 +88,19 @@
 
         <div class="col-6">
 
-            <h3 class="container text-center colorText">Your actual location: ${user.getActualRoom()},
+            <h3 class="container text-center colorText">Your actual location:
+                    ${user.getActualRoom()},
                 you can go to: </h3>
             <br>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <c:forEach var="room" items="${actualRoom.getDoor()}">
 
                     <form action="${pageContext.request.contextPath}/rooms" >
-                        <c:if test="${openedRoom || actualRoom.getOpenedDoors().contains(room)}">
+                        <c:if test="${user.getOpenedDoors().contains(room)}">
                         <div class="text-center btn-lg">
                             <input type="hidden" name="nextRoom" value="${room}">
-                            <button type="submit" class="btn nextButton">${room}</button>
+                            <button type="submit" class="btn roomButton">${room}</button>
+
                         </div>
                         </c:if>
                     </form>

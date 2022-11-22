@@ -11,7 +11,6 @@
 .colorText {
     color: var(--colorText);
 }
-
 header {
     padding: 50px 0;
     background: var(--colorDark);
@@ -19,12 +18,10 @@ header {
     background: -webkit-linear-gradient(left, var(--colorDark)  0%,var(--colorLight) 31%,var(--colorDark) 100%);
     background: linear-gradient(to right,  var(--colorDark) 0%,var(--colorLight) 31%,var(--colorDark) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#201b12', endColorstr='#201b12',GradientType=1 );
-
 }
 body {
     background: url(../img/fon.jpg);
     background-size: 100%;
-
 }
 section {
     padding: 50px 0;
@@ -46,14 +43,19 @@ section {
     background-color: var(--colorLight);
 }
 .nextButton {
+    background-color: var(--colorLight);
     display: block;
     max-width: 200px;
     margin: 0 auto;
     padding: 10px 30px;
     color: var(--bs-white);
-    background-color: var(--colorLight);
+
 }
 .nextButton:hover{
     color: var(--bs-white);
-    background-color: var(--colorDark);
+    background-color: var(--colorRed);
+}
+.roomButton {
+    background: url(../img/button.png);
+    color: var(--colorText);
 }

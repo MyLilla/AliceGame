@@ -16,7 +16,7 @@ public class GameMap {
 
         Room rabbitHole = Room.builder()
                 .name("rabbitHole")
-                .personage(personages.get(1))
+                .personage(personages.get(0))
                 .invents(List.of("potion"))
                 .door(List.of("mushroomForest"))
                 .openedInvent("potion")
@@ -26,44 +26,43 @@ public class GameMap {
         Room mushroomForest = Room.builder()
                 .name("mushroomForest")
                 .invents(List.of("white mushroom", "red mushroom", "horror mushroom", "talking mushroom"))
-                .personage(personages.get(2))
+                .personage(personages.get(1))
                 .door(List.of("hatterHome", "caterpillarArea"))
                 .openedInvent("white mushroom")
-                .openedDoors(List.of("hatterHome"))
                 .build();
         roomsMap.put(mushroomForest.getName(), mushroomForest);
 
         Room caterpillarArea = Room.builder()
                 .name("caterpillarArea")
-                .invents(List.of("big bong"))
-                .personage(personages.get(0))
+                .invents(List.of("bigBong"))
+                .personage(personages.get(2))
                 .door(List.of("mushroomForest"))
-                .openedDoors(List.of("mushroomForest"))
+                .openedInvent("")
                 .build();
         roomsMap.put(caterpillarArea.getName(), caterpillarArea);
 
         Room hatterHome = Room.builder()
                 .name("hatterHome")
-                .personage(personages.get(0))
+                .personage(personages.get(3))
                 .door(List.of("mushroomForest", "redKingdom", "whiteKingdom"))
-                .openedDoors(List.of("mushroomForest", "redKingdom"))
-                .openedInvent("big bong")
+                .openedInvent("bigBong")
                 .build();
         roomsMap.put(hatterHome.getName(), hatterHome);
 
         Room redKingdom = Room.builder()
                 .name("redKingdom")
-                .personage(personages.get(0))
+                .personage(personages.get(4))
                 .door(List.of("dungeon", "hatterHome"))
-                .openedDoors(List.of("hatterHome"))
                 .openedInvent("knife")
                 .build();
         roomsMap.put(redKingdom.getName(), redKingdom);
 
         Room dungeon = Room.builder()
                 .name("dungeon")
-                .personage(personages.get(0))
+                .invents(List.of("cake"))
+                .personage(personages.get(5))
                 .door(List.of("redKingdom"))
+                .openedInvent("")
                 .build();
         roomsMap.put(dungeon.getName(), dungeon);
 
@@ -71,6 +70,7 @@ public class GameMap {
                 .name("whiteKingdom")
                 .personage(personages.get(0))
                 .door(List.of("london", "hatterHome"))
+                .openedInvent("cake")
                 .build();
         roomsMap.put(whiteKingdom.getName(), whiteKingdom);
 
@@ -79,6 +79,7 @@ public class GameMap {
                 .name("london")
                 .personage(personages.get(0))
                 .door(List.of("rabbitHole"))
+                .openedInvent("")
                 .build();
         roomsMap.put(london.getName(), london);
 
@@ -91,24 +92,45 @@ public class GameMap {
         HashMap<String, Dialog> personsDialogs = createDialogMap();
 
         list.add(Personage.builder()
-                .name("null")
-                .imgPath("")
-                .build());
-        list.add(Personage.builder()
+                .id(0)
                 .name("whiteRabbit")
-                .imgPath("img/hatter.png")
+                .imgPath("img/rabbit.png")
                 .dialog(personsDialogs.get("whiteRabbit"))
                 .build());
 
         list.add(Personage.builder()
+                .id(1)
                 .name("cat")
                 .imgPath("img/cat.png")
                 .dialog(personsDialogs.get("cat"))
                 .build());
+
         list.add(Personage.builder()
+                .id(2)
                 .name("caterpillar")
                 .imgPath("img/caterpillar.png")
                 .dialog(personsDialogs.get("caterpillar"))
+                .build());
+
+        list.add(Personage.builder()
+                .id(3)
+                .name("hatter")
+                .imgPath("img/hatter.png")
+                .dialog(personsDialogs.get("hatter"))
+                .build());
+
+        list.add(Personage.builder()
+                .id(4)
+                .name("card")
+                .imgPath("img/card.png")
+                .dialog(personsDialogs.get(""))
+                .build());
+
+        list.add(Personage.builder()
+                .id(5)
+                .name("dragon")
+                .imgPath("img/drag.png")
+                .dialog(personsDialogs.get(""))
                 .build());
 
         return list;
@@ -187,7 +209,7 @@ public class GameMap {
                                                 .build())).build(),
                         Dialog.Question.builder()
                                 .id(1)
-                                .text("Дым такой густой, что гуменица не слышит тебя")
+                                .text("Дым такой густой, что гусеница не слышит тебя")
                                 .answers(List.of(Dialog.Answer.builder()
                                                 .text("спросить как пройти в белое королевство?")
                                                 .nextQuestion(1)
@@ -197,9 +219,40 @@ public class GameMap {
                                                 .nextQuestion(2)
                                                 .build())).build())).build();
 
+        Dialog hatter = Dialog.builder()
+                .questions(List.of(Dialog.Question.builder()
+                                .id(0)
+                                .text("Я очень нервничаю, мне нужно успокоиться")
+                                .answers(List.of(Dialog.Answer.builder()
+                                                .text("Как попасть в белое королевство?")
+                                                .nextQuestion(1).build(),
+                                        Dialog.Answer.builder()
+                                                .text(EXIT)
+                                                .nextQuestion(3).build())).build(),
+                        Dialog.Question.builder()
+                                .id(1)
+                                .text("Я не могу сейчас думать, мне нужно расслабиться!")
+                                .answers(List.of(Dialog.Answer.builder()
+                                                .text("спросить как пройти в белое королевство?")
+                                                .nextQuestion(2).build(),
+                                        Dialog.Answer.builder()
+                                                .text(EXIT)
+                                                .nextQuestion(3).build()))
+                                .build(),
+                        Dialog.Question.builder()
+                                .id(2)
+                                .text("Я слишком нервный, чтобы отвечать")
+                                .answers(List.of(Dialog.Answer.builder()
+                                                .text(EXIT)
+                                                .nextQuestion(3).build()))
+                                .build()))
+                .build();
+
         personsDialogs.put("whiteRabbit", rabbitDialog);
         personsDialogs.put("cat", cat);
         personsDialogs.put("caterpillar", caterpillar);
+        personsDialogs.put("hatter", hatter);
+
 
         return personsDialogs;
     }

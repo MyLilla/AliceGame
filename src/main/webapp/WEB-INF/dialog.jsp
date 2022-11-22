@@ -18,10 +18,11 @@
 
         <div class="row text-center">
             <div class="col-5">
-                <img src="${pageContext.request.contextPath}/${personage.getImgPath()}">
+                <img src="${pageContext.request.contextPath}/${personage.getImgPath()}" class="img-fluid">
             </div>
             <div class="col-7">
 
+                <br><br>
                         <h1 class="container text-center colorText">${textQuestion}</h1>
                     <ul>
                         <c:forEach var="answer" items="${answers}">

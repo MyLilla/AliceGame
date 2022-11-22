@@ -14,5 +14,5 @@ public class Room {
     private Personage personage;
     private List<String> invents;
     private String openedInvent;
-    private List<String> openedDoors;
+
 }
