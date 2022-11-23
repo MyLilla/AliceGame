@@ -43,6 +43,6 @@ public class InitServlet extends HttpServlet {
         }
         session.setAttribute("user", user);
 
-        response.sendRedirect("rooms");
+        response.sendRedirect(request.getContextPath() + "/rooms");
     }
 }

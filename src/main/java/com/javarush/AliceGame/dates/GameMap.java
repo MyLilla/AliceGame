@@ -51,7 +51,7 @@ public class GameMap {
 
         Room redKingdom = Room.builder()
                 .name("redKingdom")
-                .personage(personages.get(4))
+                .personage(personages.get(6))
                 .door(List.of("dungeon", "hatterHome"))
                 .openedInvent("knife")
                 .build();
@@ -68,7 +68,7 @@ public class GameMap {
 
         Room whiteKingdom = Room.builder()
                 .name("whiteKingdom")
-                .personage(personages.get(6))
+                .personage(personages.get(4))
                 .door(List.of("london", "hatterHome"))
                 .openedInvent("cake")
                 .build();
@@ -95,6 +95,7 @@ public class GameMap {
                 .name("whiteRabbit")
                 .imgPath("img/rabbit.png\" width=\"300\" height=\"500")
                 .dialog(personsDialogs.get(0)).build());
+        // лист диалогов
 
         list.add(Personage.builder()
                 .id(1)
@@ -128,8 +129,8 @@ public class GameMap {
 
         list.add(Personage.builder()
                 .id(6)
-                .name("null")
-                .imgPath("img/drag.png")
+                .name("Red Quin")
+                .imgPath("img/red.png")
                 .dialog(personsDialogs.get(6)).build());
 
         return list;
@@ -286,7 +287,7 @@ public class GameMap {
         personsDialogs.add(Dialog.builder()
                 .questions(List.of(Dialog.Question.builder()
                         .id(0)
-                        .text("dragon")
+                        .text("Red Quin")
                         .answers(List.of(Dialog.Answer.builder()
                                 .text(EXIT)
                                 .nextQuestion(1).build())).build())).build());
@@ -294,7 +295,7 @@ public class GameMap {
         personsDialogs.add(Dialog.builder()
                 .questions(List.of(Dialog.Question.builder()
                         .id(0)
-                        .text("dragon")
+                        .text("card")
                         .answers(List.of(Dialog.Answer.builder()
                                 .text(EXIT)
                                 .nextQuestion(1).build())).build())).build());

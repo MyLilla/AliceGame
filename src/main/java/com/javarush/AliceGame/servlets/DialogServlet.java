@@ -1,9 +1,7 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.Dialog;
-import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
-import com.javarush.AliceGame.dates.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +22,9 @@ public class DialogServlet extends HttpServlet {
         Dialog dialog = room.getPersonage().getDialog();
 
         List<Dialog.Question> questions = dialog.getQuestions();  // лист вопросов
+
+        // если у персонажа флаг finishQuest = true
+        // выдать победный диалог
 
         String textQuestion;
         List<Dialog.Answer> answers;

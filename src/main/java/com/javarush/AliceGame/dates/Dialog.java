@@ -9,7 +9,6 @@ import java.util.List;
 public class Dialog {
 
     private List<Question> questions;
-
     @Data
     @Builder
     public static class Question {

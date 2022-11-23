@@ -22,7 +22,7 @@
 }
 
 header {
-    padding: 15px 0;
+    padding: 25px 0;
     background: var(--colorDark);
     background: -moz-linear-gradient(left, var(--colorDark) 0%, var(--colorMid) 31%, var(--colorDark) 100%);
     background: -webkit-linear-gradient(left, var(--colorDark) 0%, var(--colorMid) 31%, var(--colorDark) 100%);

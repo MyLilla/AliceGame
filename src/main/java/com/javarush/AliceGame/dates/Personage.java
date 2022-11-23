@@ -12,5 +12,5 @@ public class Personage {
     private String name;
     private String imgPath;
     private Dialog dialog;
-
+    // лист диалогов
 }
