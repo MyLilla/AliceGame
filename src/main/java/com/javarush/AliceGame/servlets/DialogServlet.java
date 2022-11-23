@@ -1,7 +1,6 @@
 package com.javarush.AliceGame.servlets;
 
-import com.javarush.AliceGame.dates.Dialog;
-import com.javarush.AliceGame.dates.Room;
+import com.javarush.AliceGame.dates.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,37 +16,42 @@ public class DialogServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+
+        String quest = request.getParameter("quest");
+        if (quest != null) {
+
+            getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
+        }
 
         Room room = (Room) request.getSession().getAttribute("actualRoom");
         Dialog dialog = room.getPersonage().getDialog();
 
-        List<Dialog.Question> questions = dialog.getQuestions();  // лист вопросов
-
-        // если у персонажа флаг finishQuest = true
-        // выдать победный диалог
+        List<Dialog.Message> questions = dialog.getQuestions();  // лист вопросов
 
         String textQuestion;
         List<Dialog.Answer> answers;
 
         String nextQuestion = request.getParameter("nextQuestion");
 
-        if (nextQuestion == null) {
-            textQuestion = questions.get(0).getText();
-            answers = questions.get(0).getAnswers();
-        } else {
             Integer nextQuestionId = Integer.parseInt(nextQuestion);
             if (nextQuestionId == questions.size()) {
-
                 getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
             }
+
             answers = questions.get(nextQuestionId).getAnswers();
             textQuestion = questions.get(nextQuestionId).getText();
-        }
 
         request.setAttribute("room", room.getName());
         request.setAttribute("answers", answers);
         request.setAttribute("textQuestion", textQuestion);
 
         getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.sendRedirect(request.getContextPath() + "/dialog?nextQuestion=0");
     }
 }

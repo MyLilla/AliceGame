@@ -36,9 +36,12 @@ public class RoomsServlet extends HttpServlet {
         String nextRoom = request.getParameter("nextRoom");
         if (nextRoom == null) {
             actualRoom = rooms.get("rabbitHole");
-        } else {
+        } else if (nextRoom.equals("this")) {
+            actualRoom = rooms.get(user.getActualRoom());
+            } else {
             actualRoom = rooms.get(nextRoom);
         }
+        // если в лондоне (jsp)
 
         Personage personage = rooms.get(actualRoom.getName()).getPersonage();
         user.setActualRoom(actualRoom.getName());
@@ -62,12 +65,12 @@ public class RoomsServlet extends HttpServlet {
             user.getInvents().remove(invent);
             user.getUsedInvents().add(invent);
 
-            for (Map.Entry<String, Room> room : rooms.entrySet()) {
-                if (room.getValue().getOpenedInvent().equals(invent)) {
-                    user.getOpenedDoors().addAll(rooms.get(room.getKey()).getDoor());
-                    break;
-                }
-            }
+//            for (Map.Entry<String, Room> room : rooms.entrySet()) {
+//                if (room.getValue().getOpenedInvent().equals(invent)) {
+//                    user.getOpenedDoors().addAll(rooms.get(room.getKey()).getDoor());
+//                    break;
+//                }
+//            }
         }
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }

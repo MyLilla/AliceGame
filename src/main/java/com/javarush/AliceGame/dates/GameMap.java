@@ -68,17 +68,17 @@ public class GameMap {
 
         Room whiteKingdom = Room.builder()
                 .name("whiteKingdom")
+                .invents(List.of("knife"))
                 .personage(personages.get(4))
                 .door(List.of("london", "hatterHome"))
-                .openedInvent("cake")
+                .openedInvent("")
                 .build();
         roomsMap.put(whiteKingdom.getName(), whiteKingdom);
-
 
         Room london = Room.builder()
                 .name("london")
                 .door(List.of("rabbitHole"))
-                .openedInvent("")
+                .openedInvent("cake")
                 .build();
         roomsMap.put(london.getName(), london);
 
@@ -95,7 +95,6 @@ public class GameMap {
                 .name("whiteRabbit")
                 .imgPath("img/rabbit.png\" width=\"300\" height=\"500")
                 .dialog(personsDialogs.get(0)).build());
-        // лист диалогов
 
         list.add(Personage.builder()
                 .id(1)
@@ -138,76 +137,58 @@ public class GameMap {
 
     private ArrayList<Dialog> createDialogMap() {
 
-        final String EXIT = "exit";
         ArrayList<Dialog> personsDialogs = new ArrayList<>();
 
-        personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+        personsDialogs.add(0, Dialog.builder()
+                .questions(List.of(Dialog.Message.builder()
                                 .id(0)
                                 .text("There is only an entrance to the hole, but no exit. ")
                                 .answers(List.of(Dialog.Answer.builder()
-                                                .text("How to get to the London?").
-                                                nextQuestion(1).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT).
-                                                nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                                        .text("How to get to London?").
+                                        nextQuestion(1).build())).build(),
+                        Dialog.Message.builder()
                                 .id(1)
-                                .text("Дверь в Лондон на другом конце Страны чудес. Поищи дверь")
+                                .text("You have to go through all the wonderland that's behind that little door")
                                 .answers(List.of(Dialog.Answer.builder()
-                                                .text("Я не вижу двери").
+                                                .text("I don't see the door").
                                                 nextQuestion(2).build(),
                                         Dialog.Answer.builder()
-                                                .text("Поискать").
-                                                nextQuestion(3).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT).
+                                                .text("look for the door").
                                                 nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                        Dialog.Message.builder()
                                 .id(2)
-                                .text("Дверь совсем маленькая, а ты огромная. Ты по размерам не проходишь." +
-                                        "Нужно какое-то зелье для уменьшения")
+                                .text("The door is very small, and you are huge. You don't fit the size. You need some magic")
                                 .answers(List.of(Dialog.Answer.builder()
-                                                .text("Искать зелье").
+                                                .text("Look for the potion").
                                                 nextQuestion(3).build(),
                                         Dialog.Answer.builder()
-                                                .text("Где дверь?").
-                                                nextQuestion(1).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT).
-                                                nextQuestion(3).build())).build())).build());
+                                                .text("Where is London??").
+                                                nextQuestion(1).build())).build())).build());
 
-        personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+        personsDialogs.add(1, Dialog.builder()
+                .questions(List.of(Dialog.Message.builder()
                                 .id(0)
-                                .text("Кого только не увидешь на грибном поле. И чего не увидешь?")
+                                .text("Whom you will not see in the mushroom field. And what can't you see?")
                                 .answers(List.of(Dialog.Answer.builder()
-                                                .text("Где дверь в Лондон?").
+                                                .text("Where is the door to London?").
                                                 nextQuestion(1).build(),
                                         Dialog.Answer.builder()
-                                                .text("Чего не увидешь?")
+                                                .text("What can I see?")
                                                 .nextQuestion(1).build(),
                                         Dialog.Answer.builder()
-                                                .text("Какие рибы съедобные?").
-                                                nextQuestion(2).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT).
-                                                nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                                                .text("What mushrooms are edible?").
+                                                nextQuestion(2).build())).build(),
+                        Dialog.Message.builder()
                                 .id(1)
-                                .text("Разные вещи могут быть скрыты от взгляда, например двери.")
-                                .answers(List.of(Dialog.Answer.builder()
-                                        .text(EXIT).
-                                        nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                                .text("Various things can be hidden from view.")
+                                .build(),
+                        Dialog.Message.builder()
                                 .id(2)
-                                .text("Лучше спроси об этом шляпника, он в них разбирается")
-                                .answers(List.of(Dialog.Answer.builder()
-                                        .text(EXIT).
-                                        nextQuestion(3).build())).build())).build());
+                                .text("Better ask the hatter about it, he understands")
+                                .build())).build());
 
         personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+                .questions(List.of(Dialog.Message.builder()
                                 .id(0)
                                 .text("Привет, хочешь кальян?")
                                 .answers(List.of(Dialog.Answer.builder()
@@ -215,11 +196,8 @@ public class GameMap {
                                                 .nextQuestion(2).build(),
                                         Dialog.Answer.builder()
                                                 .text("нет, спасибо. Как найти дверь в лондон?")
-                                                .nextQuestion(1).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT)
-                                                .nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                                                .nextQuestion(1).build())).build(),
+                        Dialog.Message.builder()
                                 .id(1)
                                 .text("Это не просто кальян, а кальян-просветления. С ним ты можешь увидеть то, " +
                                         "чего не видел вокруг раньше")
@@ -228,24 +206,17 @@ public class GameMap {
                                                 .nextQuestion(3).build(),
                                         Dialog.Answer.builder()
                                                 .text("согласиться")
-                                                .nextQuestion(2).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT)
-                                                .nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                                                .nextQuestion(2).build())).build(),
+                        Dialog.Message.builder()
                                 .id(2)
                                 .text("Ты заметил как изменился мир? Спасибо за компанию, возьми кальян в дорогу, " +
                                         "вдруг еще что-то нужно будет увидеть")
                                 .answers(List.of(Dialog.Answer.builder()
-                                                .text("Найти кальян")
-                                                .nextQuestion(3).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT)
-                                                .nextQuestion(3)
-                                                .build())).build())).build());
+                                        .text("Найти кальян")
+                                        .nextQuestion(3).build())).build())).build());
 
         personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+                .questions(List.of(Dialog.Message.builder()
                                 .id(0)
                                 .text("Ты из грибной рощи? Ну как тебе гибы?")
                                 .answers(List.of(Dialog.Answer.builder()
@@ -253,52 +224,31 @@ public class GameMap {
                                                 .nextQuestion(3).build(),
                                         Dialog.Answer.builder()
                                                 .text("Их можно есть?")
-                                                .nextQuestion(1).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT)
-                                                .nextQuestion(3).build())).build(),
-                        Dialog.Question.builder()
+                                                .nextQuestion(1).build())).build(),
+                        Dialog.Message.builder()
                                 .id(1)
-                                .text("Не все грибы съедобные, какие-то показывают двери, какие-то увеличивают, " +
-                                        "какие-то удивают, а какие-то просто грибы")
-                                .answers(List.of(Dialog.Answer.builder()
-                                                .text("какой съесть чтобы увидить дверь?")
-                                                .nextQuestion(2).build(),
-                                        Dialog.Answer.builder()
-                                                .text(EXIT)
-                                                .nextQuestion(3).build()))
-                                .build(),
-                        Dialog.Question.builder()
-                                .id(2)
-                                .text("Вроде бы белые, но не точно")
-                                .answers(List.of(Dialog.Answer.builder()
-                                        .text(EXIT)
-                                        .nextQuestion(3).build()))
-                                .build()))
-                .build());
+                                .text("Не все грибы съедобные, какие-то увеличивают, " +
+                                        "какие-то убивают.. Белые например показывают тайные двери, а какие-то просто грибы")
+                                .build())).build());
 
         personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+                .questions(List.of(Dialog.Message.builder()
                         .id(0)
                         .text("card")
                         .answers(List.of(Dialog.Answer.builder()
-                                .text(EXIT)
+                                .text("EXIT")
                                 .nextQuestion(1).build())).build())).build());
         personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+                .questions(List.of(Dialog.Message.builder()
                         .id(0)
                         .text("Red Quin")
-                        .answers(List.of(Dialog.Answer.builder()
-                                .text(EXIT)
-                                .nextQuestion(1).build())).build())).build());
+                        .build())).build());
 
         personsDialogs.add(Dialog.builder()
-                .questions(List.of(Dialog.Question.builder()
+                .questions(List.of(Dialog.Message.builder()
                         .id(0)
                         .text("card")
-                        .answers(List.of(Dialog.Answer.builder()
-                                .text(EXIT)
-                                .nextQuestion(1).build())).build())).build());
+                        .build())).build());
 
         return personsDialogs;
     }

@@ -8,10 +8,10 @@ import java.util.List;
 @Builder
 public class Dialog {
 
-    private List<Question> questions;
+    private List<Message> questions;
     @Data
     @Builder
-    public static class Question {
+    public static class Message {
         Integer id;
         String text;
         private List<Answer> answers;

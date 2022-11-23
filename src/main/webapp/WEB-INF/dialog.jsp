@@ -14,17 +14,25 @@
 
         <h1 class="container text-center colorText">${textQuestion}</h1>
         <br><br>
+
         <ul>
             <c:forEach var="answer" items="${answers}">
-
                 <form action="${pageContext.request.contextPath}/dialog">
                     <div class="text-center btn-lg">
                         <input type="hidden" name="nextQuestion" value="${answer.getNextQuestion()}">
                         <button type="submit" class="btn nextButton">${answer.getText()}</button>
                     </div>
                 </form>
-
             </c:forEach>
+            <br>
+            <c:if test="${!user.getFinishedQuests().contains(actualRoom.getName())}">
+                <a class="btn nextButton" href="${pageContext.request.contextPath}/quest" >
+                    Check quest </a>
+            </c:if>
+
+            <br>
+            <a class="btn nextButton" href="${pageContext.request.contextPath}/rooms?nextRoom=this">
+                finish dialog</a>
         </ul>
 
     </div>

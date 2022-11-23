@@ -46,7 +46,7 @@
 
             <div class="container text-center">
                 <div class="row">
-                    <form action="${pageContext.request.contextPath}/dialog" >
+                    <form action="${pageContext.request.contextPath}/dialog" method="post">
                         <div class="text-center btn-lg">
                             <input type="hidden" name="personage" value="${personage}">
                             <button type="submit"  class="btn nextButton">
@@ -96,6 +96,13 @@
                     </form>
 
                 </c:forEach>
+            <br>
+
+            <c:if test="${user.getFinishedQuests().contains(actualRoom.getName())}">
+                <h1 class="container text-center colorText">квест комнаты выполнен</h1>
+            </c:if>
+
+
         </div>
         <div class="col-3">
             <h3 class="container text-center colorText">Your invents: </h3>
