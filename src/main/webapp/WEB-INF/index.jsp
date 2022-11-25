@@ -48,7 +48,7 @@
                     <div class="row">
                         <form action="${pageContext.request.contextPath}/dialog">
                             <div class="text-center btn-lg">
-                                <input type="hidden" name="nextMassage" value="0">
+                                <input type="hidden" name="nextMessage" value="0">
                                 <button type="submit" class="btn nextButton">
                                         ${personage.getName()}
                                 </button>
@@ -63,7 +63,7 @@
                 <br>
                 <c:forEach var="invent" items="${actualRoom.getInvents()}">
 
-                    <form action="${pageContext.request.contextPath}/rooms" method="post">
+                    <form action="${pageContext.request.contextPath}/dialog" method="post">
                         <div class="text-center btn-lg">
                             <c:if test="${!user.getInvents().contains(invent)}">
                                 <c:if test="${!user.getUsedInvents().contains(invent)}">
@@ -97,10 +97,6 @@
 
                 </c:forEach>
 
-                <c:if test="${user.getFinishedQuests().contains(actualRoom.getId())}">
-
-                    <h1 class="container text-center colorText">All location's doors are opened</h1>
-                </c:if>
                 <br>
 
             </div>
@@ -110,7 +106,7 @@
                 <br>
                 <ul>
                     <c:forEach var="invent" items="${user.getInvents()}">
-                        <form action="${pageContext.request.contextPath}/rooms" method="post">
+                        <form action="${pageContext.request.contextPath}/dialog" method="post">
                             <div class="text-center btn-lg">
                                 <input type="hidden" name="getInvent" value="${invent}">
                                 <button class="btn nextButton">${invent}</button>

@@ -27,7 +27,7 @@ public class GameMap {
         Room mushroomForest = Room.builder()
                 .id(1)
                 .name("mushroomForest")
-                .invents(List.of("white mushroom", "red mushroom", "horror mushroom", "talking mushroom"))
+                .invents(List.of("red mushroom", "horror mushroom", "white mushroom", "talking mushroom"))
                 .door(List.of(3, 2))
                 .openedInvent("white mushroom")
                 .build();
@@ -36,7 +36,7 @@ public class GameMap {
         Room caterpillarArea = Room.builder()
                 .id(2)
                 .name("caterpillarArea")
-                .invents(List.of("bigBong"))
+                .invents(List.of("watch"))
                 .door(List.of(1))
                 .openedInvent("")
                 .build();
@@ -46,7 +46,7 @@ public class GameMap {
                 .id(3)
                 .name("hatterHome")
                 .door(List.of(1, 4, 5))
-                .openedInvent("bigBong")
+                .openedInvent("watch")
                 .build();
         rooms.add(hatterHome.getId(), hatterHome);
 
@@ -63,7 +63,7 @@ public class GameMap {
                 .name("whiteKingdom")
                 .invents(List.of("knife"))
                 .door(List.of(7, 3))
-                .openedInvent("")
+                .openedInvent("cake")
                 .build();
         rooms.add(whiteKingdom.getId(), whiteKingdom);
 
@@ -71,17 +71,15 @@ public class GameMap {
                 .id(6)
                 .name("dungeon")
                 .invents(List.of("cake"))
-                .door(List.of(7))
-                .openedInvent("knife")
+                .door(List.of(4))
                 .build();
         rooms.add(dungeon.getId(), dungeon);
-
 
         Room london = Room.builder()
                 .id(7)
                 .name("london")
                 .door(List.of(0))
-                .openedInvent("cake")
+                .openedInvent("")
                 .build();
         rooms.add(london.getId(), london);
 
@@ -185,8 +183,8 @@ public class GameMap {
                                 .id(1)
                                 .text("Various things can be hidden from view.")
                                 .answers(List.of(Dialog.Answer.builder()
-                                                .text("Where is the door to London?").
-                                                nextQuestion(0).build()))
+                                        .text("Where is the door to London?").
+                                        nextQuestion(0).build()))
                                 .build(),
                         Dialog.Message.builder()
                                 .id(2)
@@ -238,13 +236,16 @@ public class GameMap {
                                         "For example, \"white\" ones show secret doors, and some are just mushrooms")
                                 .build())).build());
 
-        personsDialogs.add(4,Dialog.builder()
+        personsDialogs.add(4, Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
                         .id(0)
-                        .text("Red Queen likes red mushrooms")
+                        .text("Do you have a knife to destroy the Queen?")
                         .answers(List.of(Dialog.Answer.builder()
-                                .text("Look red mushrooms")
-                                .build())).build())).build());
+                                        .text("Find the knife")
+                                        .build(),
+                                Dialog.Answer.builder()
+                                        .text("Use knife")
+                                        .build())).build())).build());
 
         personsDialogs.add(5, Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
@@ -257,7 +258,7 @@ public class GameMap {
         personsDialogs.add(Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
                         .id(0)
-                        .text("Need to kill him")
+                        .text("Need to kill him and take away \"cake\"")
                         .build())).build());
 
         return personsDialogs;

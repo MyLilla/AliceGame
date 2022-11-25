@@ -2,6 +2,8 @@ package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.dates.UsersRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -15,6 +17,7 @@ import java.io.IOException;
 
 @WebServlet(name = "InitServlet", value = "/init")
 public class InitServlet extends HttpServlet {
+    protected static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
 
     UsersRepository usersRepository;
 
@@ -26,13 +29,20 @@ public class InitServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(true);
+        LOGGER.debug("create new session: {}", session.getId());
 
-        User user = usersRepository.addUser(request.getParameter("name"));
+        User user = usersRepository.getUserObj(request.getParameter("name"));
+
+        if (user == null) {
+            LOGGER.debug("User is null after create");
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        }
 
         session.setAttribute("user", user);
+        LOGGER.info("user {} saved in session {} ", user, request.getSession());
 
         response.sendRedirect(request.getContextPath() + "/rooms?nextRoom=0");
     }

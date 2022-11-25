@@ -19,7 +19,7 @@
             <c:forEach var="answer" items="${answers}">
                 <form action="${pageContext.request.contextPath}/dialog">
                     <div class="text-center btn-lg">
-                        <input type="hidden" name="nextMassage" value="${answer.getNextQuestion()}">
+                        <input type="hidden" name="nextMessage" value="${answer.getNextQuestion()}">
                         <button type="submit" class="btn nextButton">${answer.getText()}</button>
                     </div>
                 </form>

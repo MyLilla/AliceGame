@@ -11,10 +11,9 @@ import java.util.List;
 public class User {
 
     private String name;
-    private Integer locationId =0;
+    private Integer locationId = 0;
     private ArrayList<String> invents = new ArrayList<>();
     private ArrayList<String> usedInvents = new ArrayList<>();
     private ArrayList<Integer> openedDoors = new ArrayList<>();
-    private List<Integer> finishedQuests = new ArrayList<>();
 
 }

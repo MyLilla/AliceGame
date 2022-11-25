@@ -4,6 +4,9 @@ import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.service.QuestService;
+import com.javarush.AliceGame.service.RoomService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import javax.servlet.ServletConfig;
@@ -19,10 +22,10 @@ import java.util.ArrayList;
 
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
-
-    ArrayList <Room> rooms;
-    ArrayList <Personage> persons;
-    QuestService service;
+    protected static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
+    ArrayList<Room> rooms;
+    ArrayList<Personage> persons;
+    RoomService service;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -30,36 +33,38 @@ public class RoomsServlet extends HttpServlet {
         ServletContext context = config.getServletContext();
         rooms = (ArrayList<Room>) context.getAttribute("rooms");
         persons = (ArrayList<Personage>) context.getAttribute("persons");
-        service = new QuestService();
+        service = (RoomService) context.getAttribute("roomService");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute("user");
-
         String nextRoom = request.getParameter("nextRoom");
+        LOGGER.info("nextRoom = {}", nextRoom);
+
         if (nextRoom == null) {
+            LOGGER.debug("Parameter: nextRoom is null");
             getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
 
-        user.setLocationId(Integer.parseInt(nextRoom));
+        int nextRoomId = service.parseNextRoom(nextRoom);
 
-        request.getSession().setAttribute("user", user);
-        request.getSession().setAttribute("actualRoom", rooms.get(user.getLocationId()));
-        request.getSession().setAttribute("personage", persons.get(user.getLocationId()));
+        if (nextRoomId == (rooms.size() - 1)) {
 
-        getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-    }
+            LOGGER.info("next room size: {}, room size: {}", nextRoom, rooms.size());
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            response.sendRedirect(request.getContextPath() + "/finish");
+        } else {
 
-        User user = (User) request.getSession().getAttribute("user");
-        String invent = request.getParameter("getInvent");
+            user.setLocationId(nextRoomId);
+            LOGGER.debug("New locationId: {} for user: {}", nextRoom, user);
 
-        service.checkQuestStatus(user, invent, rooms);
+            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("actualRoom", rooms.get(user.getLocationId()));
+            request.getSession().setAttribute("personage", persons.get(user.getLocationId()));
 
-        getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        }
     }
 }
