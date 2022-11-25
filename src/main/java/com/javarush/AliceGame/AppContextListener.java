@@ -1,6 +1,5 @@
 package com.javarush.AliceGame;
 
-import com.javarush.AliceGame.dates.GameMap;
 import com.javarush.AliceGame.dates.UsersRepository;
 
 import javax.servlet.ServletContext;
@@ -14,7 +13,9 @@ public class AppContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
         GameMap gameMap = new GameMap();
-        context.setAttribute("RoomsMap", gameMap.createRoomsMap());
+        context.setAttribute("persons", gameMap.createPersonsList());
+        context.setAttribute("dialogs", gameMap.createDialogMap());
+        context.setAttribute("rooms", gameMap.createRooms());
         context.setAttribute("UsersRepository", new UsersRepository());
     }
 

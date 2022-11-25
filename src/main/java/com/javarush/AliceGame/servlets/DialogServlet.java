@@ -1,57 +1,62 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.*;
+import com.javarush.AliceGame.service.DialogService;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet (name="DialogServlet", value = "/dialog")
 public class DialogServlet extends HttpServlet {
+    ArrayList <Dialog> dialogs;
+    DialogService service;
 
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ServletContext context = config.getServletContext();
+        dialogs = (ArrayList<Dialog>) context.getAttribute("dialogs");
+        service = new DialogService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         User user = (User) request.getSession().getAttribute("user");
 
-        String quest = request.getParameter("quest");
-        if (quest != null) {
+        Personage personage = (Personage) request.getSession().getAttribute("personage");
 
-            getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
+
+        String nextMassage = request.getParameter("nextMassage");
+
+        if (nextMassage.isEmpty()) {
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
 
-        Room room = (Room) request.getSession().getAttribute("actualRoom");
-        Dialog dialog = room.getPersonage().getDialog();
+        Dialog dialog = dialogs.get(personage.getId());
 
-        List<Dialog.Message> questions = dialog.getQuestions();  // лист вопросов
+        List<Dialog.Message> messages = dialog.getMessages();
 
-        String textQuestion;
-        List<Dialog.Answer> answers;
 
-        String nextQuestion = request.getParameter("nextQuestion");
+            Integer nextQuestionId = Integer.parseInt(nextMassage);
 
-            Integer nextQuestionId = Integer.parseInt(nextQuestion);
-            if (nextQuestionId == questions.size()) {
-                getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-            }
 
-            answers = questions.get(nextQuestionId).getAnswers();
-            textQuestion = questions.get(nextQuestionId).getText();
+        List<Dialog.Answer> answers = messages.get(nextQuestionId).getAnswers();
+        String textQuestion = messages.get(nextQuestionId).getText();
 
-        request.setAttribute("room", room.getName());
+
         request.setAttribute("answers", answers);
         request.setAttribute("textQuestion", textQuestion);
 
         getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        response.sendRedirect(request.getContextPath() + "/dialog?nextQuestion=0");
-    }
 }

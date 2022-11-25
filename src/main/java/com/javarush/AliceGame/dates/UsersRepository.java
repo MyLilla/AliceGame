@@ -14,6 +14,8 @@ public class UsersRepository {
         } else {
             User user = new User();
             user.setName(userName);
+            user.getOpenedDoors().add(3);
+            user.getOpenedDoors().add(4);
             usersRep.put(userName, user);
             return user;
         }

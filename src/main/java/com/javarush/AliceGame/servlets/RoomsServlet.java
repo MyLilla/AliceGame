@@ -3,6 +3,8 @@ package com.javarush.AliceGame.servlets;
 import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
+import com.javarush.AliceGame.service.QuestService;
+
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -12,19 +14,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+
 
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
 
-    HashMap<String, Room> rooms;
+    ArrayList <Room> rooms;
+    ArrayList <Personage> persons;
+    QuestService service;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext context = config.getServletContext();
-        rooms = (HashMap<String, Room>) context.getAttribute("RoomsMap");
+        rooms = (ArrayList<Room>) context.getAttribute("rooms");
+        persons = (ArrayList<Personage>) context.getAttribute("persons");
+        service = new QuestService();
     }
 
     @Override
@@ -32,23 +38,16 @@ public class RoomsServlet extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
 
-        Room actualRoom;
         String nextRoom = request.getParameter("nextRoom");
         if (nextRoom == null) {
-            actualRoom = rooms.get("rabbitHole");
-        } else if (nextRoom.equals("this")) {
-            actualRoom = rooms.get(user.getActualRoom());
-            } else {
-            actualRoom = rooms.get(nextRoom);
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
-        // если в лондоне (jsp)
 
-        Personage personage = rooms.get(actualRoom.getName()).getPersonage();
-        user.setActualRoom(actualRoom.getName());
+        user.setLocationId(Integer.parseInt(nextRoom));
 
         request.getSession().setAttribute("user", user);
-        request.getSession().setAttribute("actualRoom", actualRoom);
-        request.getSession().setAttribute("personage", personage);
+        request.getSession().setAttribute("actualRoom", rooms.get(user.getLocationId()));
+        request.getSession().setAttribute("personage", persons.get(user.getLocationId()));
 
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
@@ -59,19 +58,8 @@ public class RoomsServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         String invent = request.getParameter("getInvent");
 
-        if (!(user.getInvents().contains(invent))) {
-            user.getInvents().add(invent);
-        } else {
-            user.getInvents().remove(invent);
-            user.getUsedInvents().add(invent);
+        service.checkQuestStatus(user, invent, rooms);
 
-//            for (Map.Entry<String, Room> room : rooms.entrySet()) {
-//                if (room.getValue().getOpenedInvent().equals(invent)) {
-//                    user.getOpenedDoors().addAll(rooms.get(room.getKey()).getDoor());
-//                    break;
-//                }
-//            }
-        }
         getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }

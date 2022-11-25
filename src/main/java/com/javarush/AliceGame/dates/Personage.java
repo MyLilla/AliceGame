@@ -11,5 +11,5 @@ public class Personage {
     private int id;
     private String name;
     private String imgPath;
-    private Dialog dialog;
+
 }

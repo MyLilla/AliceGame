@@ -1,7 +1,5 @@
 package com.javarush.AliceGame.servlets;
 
-import com.javarush.AliceGame.dates.GameMap;
-import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.dates.UsersRepository;
 
@@ -33,15 +31,9 @@ public class InitServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         User user = usersRepository.addUser(request.getParameter("name"));
-        if (user.getActualRoom() == null) {
-            user.setActualRoom("rabbitHole");
-            user.getUsedInvents().add("");
-            user.getOpenedDoors().add("hatterHome");
-            user.getOpenedDoors().add("redKingdom");
 
-        }
         session.setAttribute("user", user);
 
-        response.sendRedirect(request.getContextPath() + "/rooms");
+        response.sendRedirect(request.getContextPath() + "/rooms?nextRoom=0");
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Builder
 public class Dialog {
 
-    private List<Message> questions;
+    private List<Message> messages;
     @Data
     @Builder
     public static class Message {
