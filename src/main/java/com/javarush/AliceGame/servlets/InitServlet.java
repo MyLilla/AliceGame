@@ -18,14 +18,13 @@ import java.io.IOException;
 @WebServlet(name = "InitServlet", value = "/init")
 public class InitServlet extends HttpServlet {
     protected static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
-
     UsersRepository usersRepository;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext context = config.getServletContext();
-        usersRepository = (UsersRepository) context.getAttribute("UsersRepository");
+        usersRepository = (UsersRepository) context.getAttribute("usersRepository");
     }
 
     @Override
@@ -35,6 +34,7 @@ public class InitServlet extends HttpServlet {
         LOGGER.debug("create new session: {}", session.getId());
 
         User user = usersRepository.getUserObj(request.getParameter("name"));
+        LOGGER.info("got user: {}", user);
 
         if (user == null) {
             LOGGER.debug("User is null after create");

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,7 @@ public class User {
     private Integer locationId = 0;
     private ArrayList<String> invents = new ArrayList<>();
     private ArrayList<String> usedInvents = new ArrayList<>();
-    private ArrayList<Integer> openedDoors = new ArrayList<>();
+    private HashSet<Integer> openedDoors = new HashSet<>();
 
+    private int currentGame = 0;
 }

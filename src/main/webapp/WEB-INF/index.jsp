@@ -63,7 +63,7 @@
                 <br>
                 <c:forEach var="invent" items="${actualRoom.getInvents()}">
 
-                    <form action="${pageContext.request.contextPath}/dialog" method="post">
+                    <form action="${pageContext.request.contextPath}/quest" method="post">
                         <div class="text-center btn-lg">
                             <c:if test="${!user.getInvents().contains(invent)}">
                                 <c:if test="${!user.getUsedInvents().contains(invent)}">
@@ -106,7 +106,7 @@
                 <br>
                 <ul>
                     <c:forEach var="invent" items="${user.getInvents()}">
-                        <form action="${pageContext.request.contextPath}/dialog" method="post">
+                        <form action="${pageContext.request.contextPath}/quest" >
                             <div class="text-center btn-lg">
                                 <input type="hidden" name="getInvent" value="${invent}">
                                 <button class="btn nextButton">${invent}</button>

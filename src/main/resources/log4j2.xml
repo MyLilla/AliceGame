@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="AliceGame" packages="">
+
+    <Appenders>
+
+        <RollingFile name="RollingFile" fileName="D:/Projects/AliceGame/src/logs/app.log"
+                     filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorFile" fileName="D:/Projects/AliceGame/src/logs/error.log"
+                     filePattern="logs/error-%d{MM-dd-yyyy}.log.gz">>
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="UsersRepository" level="ALL" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Logger name="RoomsServlet" level="all" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Logger name="FinishServlet" level="all">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Logger name="QuestService" level="all">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Logger name="DialogServlet" level="all" >
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Root name="RoomsServlet" level="ERROR">
+            <AppenderRef ref="ErrorFile"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

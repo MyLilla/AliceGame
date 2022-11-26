@@ -3,11 +3,9 @@ package com.javarush.AliceGame.servlets;
 import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
-import com.javarush.AliceGame.service.QuestService;
 import com.javarush.AliceGame.service.RoomService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -41,7 +39,7 @@ public class RoomsServlet extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
         String nextRoom = request.getParameter("nextRoom");
-        LOGGER.info("nextRoom = {}", nextRoom);
+        LOGGER.info("nextRoom = {} for user: {}", nextRoom, user.getName());
 
         if (nextRoom == null) {
             LOGGER.debug("Parameter: nextRoom is null");
@@ -50,13 +48,11 @@ public class RoomsServlet extends HttpServlet {
 
         int nextRoomId = service.parseNextRoom(nextRoom);
 
-        if (nextRoomId == (rooms.size() - 1)) {
+        if (service.checkWin(nextRoomId, user)) {
+            LOGGER.info("user: {} is winner", user.getName());
+            response.sendRedirect(request.getContextPath() + "/finish?win=true");
 
-            LOGGER.info("next room size: {}, room size: {}", nextRoom, rooms.size());
-
-            response.sendRedirect(request.getContextPath() + "/finish");
         } else {
-
             user.setLocationId(nextRoomId);
             LOGGER.debug("New locationId: {} for user: {}", nextRoom, user);
 
