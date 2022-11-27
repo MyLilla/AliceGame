@@ -3,8 +3,10 @@ package com.javarush.AliceGame.service;
 import com.javarush.AliceGame.dates.Dialog;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
+import com.javarush.AliceGame.exceptions.InvalidStateException;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +27,15 @@ public class QuestService {
     }
 
     public void addInventToUser(User user, String invent) {
+        if (ObjectUtils.isEmpty(invent)){
+            LOGGER.error("invent is null or empty");
+            throw new InvalidStateException("invent can't be null or empty");
+        }
+        if (user == null){
+            LOGGER.error("user is null or empty");
+            throw new InvalidStateException("user can't be null or empty");
+        }
+
         if (!(user.getInvents().contains(invent))) {
             user.getInvents().add(invent);
             LOGGER.info("In user invent added: {}", invent);
@@ -33,12 +44,26 @@ public class QuestService {
 
     public void usedInvent(User user, String invent) {
 
+        if (ObjectUtils.isEmpty(invent)){
+            LOGGER.error("invent is null or empty");
+            throw new InvalidStateException("invent can't be null or empty");
+        }
+        if (user == null){
+            LOGGER.error("user is null or empty");
+            throw new InvalidStateException("user can't be null or empty");
+        }
+
         user.getInvents().remove(invent);
         user.getUsedInvents().add(invent);
         LOGGER.info("{} - was used", invent);
 
+        openDoors(user, invent);
+    }
+
+    private void openDoors(User user, String invent) {
         for (Room room : rooms) {
-            if (user.getUsedInvents().contains(room.getOpenedInvent())) {
+            if (user.getUsedInvents()
+                    .contains(room.getOpenedInvent())) {
                 user.getOpenedDoors().addAll(room.getDoor());
                 LOGGER.info("in room: {} was opened all doors. With invent: {}", room.getId(), invent);
             }

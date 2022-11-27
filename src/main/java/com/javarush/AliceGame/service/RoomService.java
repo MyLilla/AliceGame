@@ -22,7 +22,7 @@ public class RoomService {
         this.rooms = rooms;
     }
 
-    public Integer parseNextRoom(String nextRoom) {
+    public int parseNextRoom(String nextRoom) {
 
         if (ObjectUtils.isEmpty(nextRoom)) {
             LOGGER.error("next room is null or empty");

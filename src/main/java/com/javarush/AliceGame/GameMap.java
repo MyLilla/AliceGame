@@ -61,7 +61,7 @@ public class GameMap {
         Room whiteKingdom = Room.builder()
                 .id(5)
                 .name("whiteKingdom")
-                .invents(List.of("knife"))
+                .invents(List.of("knife", "sword"))
                 .door(List.of(7, 3))
                 .openedInvent("cake")
                 .build();
@@ -238,14 +238,30 @@ public class GameMap {
 
         personsDialogs.add(4, Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
-                        .id(0)
-                        .text("Do you have a knife to destroy the Queen?")
-                        .answers(List.of(Dialog.Answer.builder()
-                                        .text("Find the knife")
-                                        .build(),
-                                Dialog.Answer.builder()
-                                        .text("Use knife")
-                                        .build())).build())).build());
+                                .id(0)
+                                .text("What do you need?")
+                                .answers(List.of(Dialog.Answer.builder()
+                                        .text("I find the cake")
+                                        .nextQuestion(1)
+                                        .build())).build(),
+                        Dialog.Message.builder()
+                                .id(1)
+                                .text("I have a cake in the dungeon, but I can't give it to you.")
+                                .answers(List.of(Dialog.Answer.builder()
+                                        .text("Ask for a piece")
+                                        .nextQuestion(2)
+                                        .build(), Dialog.Answer.builder()
+                                        .text("Look for the entrance to the dungeon")
+                                        .build())).build(),
+                        Dialog.Message.builder()
+                                .id(2)
+                                .text("If you have the knife, You can enter in the dungeon")
+                                .answers(List.of(Dialog.Answer.builder()
+                                                .text("Look for the knife")
+                                                .build(),
+                                        Dialog.Answer.builder()
+                                                .text("Use the knife")
+                                                .build())).build())).build());
 
         personsDialogs.add(5, Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
@@ -258,7 +274,7 @@ public class GameMap {
         personsDialogs.add(Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
                         .id(0)
-                        .text("Need to kill him and take away \"cake\"")
+                        .text("I'm watching you. One creature - one piece of cake")
                         .build())).build());
 
         return personsDialogs;
