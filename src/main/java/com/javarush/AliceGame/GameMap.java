@@ -4,12 +4,16 @@ import com.javarush.AliceGame.dates.Dialog;
 import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class GameMap {
+
+    protected static final Logger LOGGER = LogManager.getLogger(GameMap.class);
 
     public ArrayList<Room> createRooms() {
 
@@ -22,6 +26,7 @@ public class GameMap {
                 .door(List.of(1))
                 .openedInvent("potion")
                 .build();
+        LOGGER.info("created {} with id: {}", rabbitHole.getName(), rabbitHole.getId());
         rooms.add(rabbitHole.getId(), rabbitHole);
 
         Room mushroomForest = Room.builder()
@@ -31,6 +36,7 @@ public class GameMap {
                 .door(List.of(3, 2))
                 .openedInvent("white mushroom")
                 .build();
+        LOGGER.info("created {} with id: {}", mushroomForest.getName(), mushroomForest.getId());
         rooms.add(mushroomForest.getId(), mushroomForest);
 
         Room caterpillarArea = Room.builder()
@@ -40,6 +46,7 @@ public class GameMap {
                 .door(List.of(1))
                 .openedInvent("")
                 .build();
+        LOGGER.info("created {} with id: {}", caterpillarArea.getName(), caterpillarArea.getId());
         rooms.add(caterpillarArea.getId(), caterpillarArea);
 
         Room hatterHome = Room.builder()
@@ -48,6 +55,7 @@ public class GameMap {
                 .door(List.of(1, 4, 5))
                 .openedInvent("watch")
                 .build();
+        LOGGER.info("created {} with id: {}", hatterHome.getName(), hatterHome.getId());
         rooms.add(hatterHome.getId(), hatterHome);
 
         Room redKingdom = Room.builder()
@@ -56,6 +64,7 @@ public class GameMap {
                 .door(List.of(6, 3))
                 .openedInvent("knife")
                 .build();
+        LOGGER.info("created {} with id: {}", redKingdom.getName(), redKingdom.getId());
         rooms.add(redKingdom.getId(), redKingdom);
 
         Room whiteKingdom = Room.builder()
@@ -65,6 +74,7 @@ public class GameMap {
                 .door(List.of(7, 3))
                 .openedInvent("cake")
                 .build();
+        LOGGER.info("created {} with id: {}", whiteKingdom.getName(), whiteKingdom.getId());
         rooms.add(whiteKingdom.getId(), whiteKingdom);
 
         Room dungeon = Room.builder()
@@ -73,6 +83,7 @@ public class GameMap {
                 .invents(List.of("cake"))
                 .door(List.of(4))
                 .build();
+        LOGGER.info("created {} with id: {}", dungeon.getName(), dungeon.getId());
         rooms.add(dungeon.getId(), dungeon);
 
         Room london = Room.builder()
@@ -81,58 +92,61 @@ public class GameMap {
                 .door(List.of(0))
                 .openedInvent("")
                 .build();
+        LOGGER.info("created {} with id: {}", london.getName(), london.getId());
         rooms.add(london.getId(), london);
 
+        LOGGER.debug("Rooms list size: {}", rooms.size());
         return rooms;
     }
 
     public ArrayList<Personage> createPersonsList() {
 
-        ArrayList<Personage> list = new ArrayList<>();
+        ArrayList<Personage> personages = new ArrayList<>();
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(0)
                 .name("whiteRabbit")
                 .imgPath("img/rabbit.png\" width=\"300\" height=\"500")
                 .build());
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(1)
                 .name("cat")
                 .imgPath("img/cat.png\" width=\"300\" height=\"500")
                 .build());
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(2)
                 .name("caterpillar")
                 .imgPath("img/caterpillar.png")
                 .build());
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(3)
                 .name("hatter")
                 .imgPath("img/hatter.png")
                 .build());
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(4)
                 .name("Red Quin")
                 .imgPath("img/red.png")
                 .build());
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(5)
                 .name("card")
                 .imgPath("img/card.png")
                 .build());
 
-        list.add(Personage.builder()
+        personages.add(Personage.builder()
                 .id(6)
                 .name("dragon")
                 .imgPath("img/drag.png")
                 .build());
 
-        return list;
+        LOGGER.debug("Persons list size: {}", personages.size());
+        return personages;
     }
 
     public ArrayList<Dialog> createDialogMap() {
@@ -277,6 +291,7 @@ public class GameMap {
                         .text("I'm watching you. One creature - one piece of cake")
                         .build())).build());
 
+        LOGGER.debug("DialogMap list size: {}", personsDialogs.size());
         return personsDialogs;
     }
 }

@@ -27,11 +27,11 @@ public class QuestService {
     }
 
     public void addInventToUser(User user, String invent) {
-        if (ObjectUtils.isEmpty(invent)){
+        if (ObjectUtils.isEmpty(invent)) {
             LOGGER.error("invent is null or empty");
-            throw new InvalidStateException("invent can't be null or empty");
+            throw new InvalidStateException("Invent can't be null or empty");
         }
-        if (user == null){
+        if (user == null) {
             LOGGER.error("user is null or empty");
             throw new InvalidStateException("user can't be null or empty");
         }
@@ -44,11 +44,11 @@ public class QuestService {
 
     public void usedInvent(User user, String invent) {
 
-        if (ObjectUtils.isEmpty(invent)){
+        if (ObjectUtils.isEmpty(invent)) {
             LOGGER.error("invent is null or empty");
             throw new InvalidStateException("invent can't be null or empty");
         }
-        if (user == null){
+        if (user == null) {
             LOGGER.error("user is null or empty");
             throw new InvalidStateException("user can't be null or empty");
         }

@@ -26,7 +26,7 @@ public class DialogService {
 
         if (ObjectUtils.isEmpty(nextMessage)) {
             LOGGER.error("Next message is empty or null");
-            throw new DialogException("NextMessage can't be empty");
+            throw new DialogException("NextMessage can't be empty or null");
         }
         int nextQuestionId = Integer.parseInt(nextMessage);
         LOGGER.info("nextQuestionId: {}", nextQuestionId);

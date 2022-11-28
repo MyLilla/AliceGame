@@ -19,6 +19,7 @@ import java.util.ArrayList;
 @WebListener
 public class AppContextListener implements ServletContextListener {
     protected static final Logger LOGGER = LogManager.getLogger(AppContextListener.class);
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
@@ -26,21 +27,27 @@ public class AppContextListener implements ServletContextListener {
         context.setAttribute("usersRepository", new UsersRepository());
 
         GameMap game = new GameMap();
+        LOGGER.info("created GameMap: {}", game);
 
         ArrayList<Personage> persons = game.createPersonsList();
-        LOGGER.debug("created persons list: {}", persons);
         context.setAttribute("persons", persons);
+        LOGGER.info("persons list: {} created and added to context like: \"persons\"", persons);
 
         ArrayList<Dialog> dialogs = game.createDialogMap();
-        LOGGER.debug("created dialogs list: {}", dialogs);
         context.setAttribute("dialogs", dialogs);
+        LOGGER.info("dialogs list: {} created and added to context like: \"dialogs\"", dialogs);
 
         ArrayList<Room> rooms = game.createRooms();
-        LOGGER.debug("created rooms list: {}", rooms);
         context.setAttribute("rooms", rooms);
+        LOGGER.info("dialogs rooms: {} created and added to context like: \"rooms\"", rooms);
 
         context.setAttribute("questService", new QuestService(rooms, dialogs));
+        LOGGER.info("created QuestService and added to context like: \"questService\"");
+
         context.setAttribute("roomService", new RoomService(rooms, persons));
+        LOGGER.info("created RoomService and added to context like: \"roomService\"");
+
         context.setAttribute("dialogService", new DialogService(dialogs));
+        LOGGER.info("created DialogService and added to context like: \"dialogService\"");
     }
 }

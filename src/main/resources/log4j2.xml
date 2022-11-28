@@ -3,13 +3,24 @@
 
     <Appenders>
 
-        <RollingFile name="RollingFile" fileName="D:/Projects/AliceGame/src/logs/app.log"
+        <RollingFile name="Service" fileName="D:/Projects/AliceGame/src/logs/app.log"
                      filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
             <PatternLayout>
                 <pattern>%d %p %c{1.} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="Servlet" fileName="D:/Projects/AliceGame/src/logs/web.log"
+                     filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="250 MB"/>
             </Policies>
         </RollingFile>
@@ -20,31 +31,55 @@
                 <pattern>%d %p %c{1.} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="250 MB"/>
             </Policies>
         </RollingFile>
 
     </Appenders>
     <Loggers>
-        <Logger name="UsersRepository" level="ALL" additivity="false">
-            <AppenderRef ref="RollingFile"/>
+        <Logger name="UsersRepository" level="info" additivity="false">
+            <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="RoomsServlet" level="all" additivity="false">
-            <AppenderRef ref="RollingFile"/>
+        <Logger name="DialogService" level="info" additivity="false">
+            <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="FinishServlet" level="all">
-            <AppenderRef ref="RollingFile"/>
+        <Logger name="QuestService" level="info" additivity="false">
+            <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="QuestService" level="all">
-            <AppenderRef ref="RollingFile"/>
+        <Logger name="RoomService" level="info" additivity="false">
+            <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="DialogServlet" level="all" >
-            <AppenderRef ref="RollingFile"/>
+        <Logger name="GameMap" level="info" additivity="false">
+            <AppenderRef ref="Service"/>
+        </Logger>
+
+        <Logger name="AppContextListener" level="info" additivity="false">
+            <AppenderRef ref="Servlet"/>
+        </Logger>
+
+        <Logger name="DialogServlet" level="info" additivity="false">
+            <AppenderRef ref="Servlet"/>
+        </Logger>
+
+        <Logger name="FinishServlet" level="info" additivity="false">
+            <AppenderRef ref="Servlet"/>
+        </Logger>
+
+        <Logger name="InitServlet" level="info" additivity="false">
+            <AppenderRef ref="Servlet"/>
+        </Logger>
+
+        <Logger name="QuestServlet" level="info" additivity="false">
+            <AppenderRef ref="Servlet"/>
+        </Logger>
+
+        <Logger name="RoomsServlet" level="info" additivity="false">
+            <AppenderRef ref="Servlet"/>
         </Logger>
 
         <Root name="RoomsServlet" level="ERROR">

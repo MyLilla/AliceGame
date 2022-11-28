@@ -23,11 +23,14 @@ public class RoomService {
     public RoomService(ArrayList<Room> rooms, ArrayList<Personage> personages) {
         this.rooms = rooms;
         this.personages = personages;
+        LOGGER.info("Created RoomService");
     }
-    public Room getActualRoom (User user) {
+
+    public Room getActualRoom(User user) {
         return rooms.get(user.getLocationId());
     }
-    public Personage getActualPersonage (User user) {
+
+    public Personage getActualPersonage(User user) {
         return personages.get(user.getLocationId());
     }
 
@@ -39,18 +42,21 @@ public class RoomService {
         }
         return Integer.parseInt(nextRoom);
     }
+
     public Integer getFinishRoomId() {
         return rooms.size() - 1;
     }
 
     public boolean checkWin(Integer nextRoomId, User user) {
         Integer finishRoom = getFinishRoomId();
+        LOGGER.debug("Get finishRoomId: {}", finishRoom);
+
         if (Objects.equals(nextRoomId, finishRoom)) {
-            LOGGER.debug("Objects {} == {}", nextRoomId, finishRoom);
+            LOGGER.debug("Objects {} equals {}", nextRoomId, finishRoom);
 
             int openedDoors = user.getOpenedDoors().size();
-
             LOGGER.debug("opened doors: {}  finished doors: {}", openedDoors, rooms.size());
+
             return openedDoors + 1 == rooms.size();
         }
         return false;

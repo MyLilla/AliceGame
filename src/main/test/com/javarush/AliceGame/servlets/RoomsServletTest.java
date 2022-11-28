@@ -112,18 +112,21 @@ class RoomsServletTest {
 
     @Test
     @Disabled
+    // пытается обращаться к RequestDispatcher
     void doGetTest_WhenWin() throws ServletException, IOException {
 
         when(session.getAttribute(eq("user")))
                 .thenReturn(user);
         when(session.getAttribute("nextRoom"))
                 .thenReturn("0");
+        // хотя тут указывается, что условие перехода по redirect == true
         when(roomsService.checkWin(0, user))
                 .thenReturn(true);
+        when(request.getContextPath()).thenReturn("path");
 
         roomsServlet.doGet(request, response);
 
         verify(response, times(1))
-                .sendRedirect(eq("finish?win=true"));
+                .sendRedirect(eq("path/finish?win=true"));
     }
 }
