@@ -5,6 +5,7 @@ import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.service.DialogService;
 import com.javarush.AliceGame.service.RoomService;
+import com.javarush.AliceGame.servlets.DialogServlet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

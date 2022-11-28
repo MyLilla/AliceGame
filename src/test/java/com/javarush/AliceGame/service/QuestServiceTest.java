@@ -5,6 +5,7 @@ import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.exceptions.InvalidStateException;
+import com.javarush.AliceGame.service.QuestService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,5 +1,6 @@
 package com.javarush.AliceGame.dates;
 
+import com.javarush.AliceGame.dates.Invent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package com.javarush.AliceGame;
 
+import com.javarush.AliceGame.GameMap;
 import com.javarush.AliceGame.dates.Room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

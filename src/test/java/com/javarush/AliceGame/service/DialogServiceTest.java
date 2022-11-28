@@ -3,6 +3,7 @@ package com.javarush.AliceGame.service;
 import com.javarush.AliceGame.dates.Dialog;
 import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.exceptions.DialogException;
+import com.javarush.AliceGame.service.DialogService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

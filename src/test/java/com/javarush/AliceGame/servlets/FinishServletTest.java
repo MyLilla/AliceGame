@@ -2,7 +2,9 @@ package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.dates.UsersRepository;
+import com.javarush.AliceGame.servlets.FinishServlet;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,13 +20,12 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
-class InitServletTest {
-
+class FinishServletTest {
     @Mock
     HttpServletRequest request;
     @Mock
@@ -40,7 +41,7 @@ class InitServletTest {
     @Mock
     UsersRepository usersRepository;
 
-    InitServlet initServlet;
+    FinishServlet finishServlet;
     User user;
 
     @BeforeEach
@@ -51,47 +52,35 @@ class InitServletTest {
         when(context.getAttribute(eq("usersRepository")))
                 .thenReturn(usersRepository);
 
-        when(request.getSession(true))
+        when(request.getSession())
                 .thenReturn(session);
 
-        initServlet = new InitServlet();
-        initServlet.init(servletConfig);
+        finishServlet = new FinishServlet();
+        finishServlet.init(servletConfig);
 
         user = new User();
     }
 
     @Test
     void doGetTest() throws ServletException, IOException {
-
-        when(request.getParameter("name"))
-                .thenReturn("name");
-        when(usersRepository.getUserObj("name"))
+        when(request.getSession().getAttribute("user"))
                 .thenReturn(user);
-        when(request.getContextPath())
-                .thenReturn("path");
 
-        initServlet.doGet(request, response);
+        when(usersRepository.resetProgress(user))
+                .thenReturn(user);
 
-        verify(session, times(1))
-                .setAttribute(eq("user"), eq(user));
+        when(request.getParameter(eq("win")))
+                .thenReturn("true");
 
-        verify(response, times(1))
-                .sendRedirect(eq("path/rooms?nextRoom=0"));
-
-    }
-
-    @Test
-    void doGetTest_WhenUserIsNull() throws ServletException, IOException {
-
-        when(request.getParameter("name"))
-                .thenReturn("name");
-        when(usersRepository.getUserObj("name"))
-                .thenReturn(null);
-
-        when(context.getRequestDispatcher(eq("/WEB-INF/index.jsp")))
+        when(context.getRequestDispatcher(eq("/WEB-INF/finish.jsp")))
                 .thenReturn(requestDispatcher);
 
-        initServlet.doGet(request, response);
+        finishServlet.doGet(request, response);
+
+        verify(request.getSession(), times(1))
+                .setAttribute(eq("user"), eq(user));
+        verify(request, times(1))
+                .setAttribute(eq("win"), eq("true"));
 
         verify(requestDispatcher, times(1))
                 .forward(request, response);
