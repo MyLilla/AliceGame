@@ -10,7 +10,7 @@ class InventTest {
     Invent invent;
 
     @BeforeEach
-    void init () {
+    void setup () {
         invent = Invent.builder()
                 .id(0)
                 .name("Example")

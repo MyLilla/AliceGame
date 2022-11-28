@@ -40,7 +40,7 @@ public class AppContextListener implements ServletContextListener {
         context.setAttribute("rooms", rooms);
 
         context.setAttribute("questService", new QuestService(rooms, dialogs));
-        context.setAttribute("roomService", new RoomService(rooms));
+        context.setAttribute("roomService", new RoomService(rooms, persons));
         context.setAttribute("dialogService", new DialogService(dialogs));
     }
 }

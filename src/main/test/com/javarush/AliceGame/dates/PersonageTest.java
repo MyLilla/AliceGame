@@ -9,7 +9,7 @@ class PersonageTest {
     Personage personage;
 
     @BeforeEach
-    void init () {
+    void setup() {
         personage = Personage.builder()
                 .id(0)
                 .name("cat")

@@ -1,5 +1,6 @@
 package com.javarush.AliceGame.service;
 
+import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.exceptions.RoomException;
@@ -17,9 +18,17 @@ import java.util.Objects;
 public class RoomService {
     protected static final Logger LOGGER = LogManager.getLogger(RoomService.class);
     private final ArrayList<Room> rooms;
+    private final ArrayList<Personage> personages;
 
-    public RoomService(ArrayList<Room> rooms) {
+    public RoomService(ArrayList<Room> rooms, ArrayList<Personage> personages) {
         this.rooms = rooms;
+        this.personages = personages;
+    }
+    public Room getActualRoom (User user) {
+        return rooms.get(user.getLocationId());
+    }
+    public Personage getActualPersonage (User user) {
+        return personages.get(user.getLocationId());
     }
 
     public int parseNextRoom(String nextRoom) {
@@ -30,7 +39,6 @@ public class RoomService {
         }
         return Integer.parseInt(nextRoom);
     }
-
     public Integer getFinishRoomId() {
         return rooms.size() - 1;
     }

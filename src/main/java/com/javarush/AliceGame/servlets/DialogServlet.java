@@ -2,7 +2,6 @@ package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.*;
 import com.javarush.AliceGame.service.DialogService;
-import com.javarush.AliceGame.service.QuestService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,19 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "DialogServlet", value = "/dialog")
 public class DialogServlet extends HttpServlet {
     protected static final Logger LOGGER = LogManager.getLogger(DialogServlet.class);
-    ArrayList<Dialog> dialogs;
     DialogService dialogService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext context = config.getServletContext();
-        dialogs = (ArrayList<Dialog>) context.getAttribute("dialogs");
         dialogService = (DialogService) context.getAttribute("dialogService");
     }
 

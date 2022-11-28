@@ -37,7 +37,7 @@
             </div>
 
             <div class="modal fade" id="rulModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm <section id="preview">">
+                <div class="modal-dialog modal-sm" id="preview">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Rules for game</h5>

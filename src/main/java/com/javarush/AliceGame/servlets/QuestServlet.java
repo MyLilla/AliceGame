@@ -15,20 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet (name = "QuestServlet", value = "/quest")
+@WebServlet(name = "QuestServlet", value = "/quest")
 public class QuestServlet extends HttpServlet {
 
     protected static final Logger LOGGER = LogManager.getLogger(QuestServlet.class);
-
     QuestService questService;
-
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext context = config.getServletContext();
         questService = (QuestService) context.getAttribute("questService");
-
     }
 
     @Override
@@ -37,16 +34,15 @@ public class QuestServlet extends HttpServlet {
         String invent = request.getParameter("getInvent");
         LOGGER.debug("used invent: {}", invent);
 
-            if (questService.checkFail(invent)){
-                response.sendRedirect(request.getContextPath() + "/finish?win=false");
-            } else {
+        if (questService.checkFail(invent)) {
+            response.sendRedirect(request.getContextPath() + "/finish?win=false");
+        } else {
 
-                questService.usedInvent(user, invent);
+            questService.usedInvent(user, invent);
 
-                request.getSession().setAttribute("user", user);
-                getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-            }
-
+            request.getSession().setAttribute("user", user);
+            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        }
     }
 
     @Override

@@ -1,9 +1,12 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
+import com.javarush.AliceGame.dates.UsersRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,19 +19,21 @@ import java.io.IOException;
 public class FinishServlet extends HttpServlet {
     protected static final Logger LOGGER = LogManager.getLogger(FinishServlet.class);
 
+    UsersRepository usersRepository;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ServletContext context = config.getServletContext();
+        usersRepository = (UsersRepository) context.getAttribute("usersRepository");
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute("user");
         LOGGER.info("user: {} finished game", user);
 
-        user.setLocationId(0);
-        user.getInvents().clear();
-        user.getUsedInvents().clear();
-        user.getOpenedDoors().clear();
-        user.getOpenedDoors().add(3);
-        user.getOpenedDoors().add(4);
-        user.setCurrentGame(user.getCurrentGame() + 1);
+        usersRepository.resetProgress(user);
         LOGGER.info("user: {} cleaning result, current game = {}", user, user.getCurrentGame());
 
         request.getSession().setAttribute("user", user);

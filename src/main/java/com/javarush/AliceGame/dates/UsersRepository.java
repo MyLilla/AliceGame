@@ -32,4 +32,18 @@ public class UsersRepository {
         usersRep.put(userName, user);
         return user;
     }
+
+    public User resetProgress(User user) {
+
+        user.setLocationId(0);
+        user.getInvents().clear();
+        user.getUsedInvents().clear();
+        user.getOpenedDoors().clear();
+        user.getOpenedDoors().add(3);
+        user.getOpenedDoors().add(4);
+        user.setCurrentGame(user.getCurrentGame() + 1);
+        LOGGER.info("user: {} cleaning result, current game = {}", user, user.getCurrentGame());
+
+        return user;
+    }
 }

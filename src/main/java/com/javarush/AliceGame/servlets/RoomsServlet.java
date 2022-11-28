@@ -1,7 +1,5 @@
 package com.javarush.AliceGame.servlets;
 
-import com.javarush.AliceGame.dates.Personage;
-import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.service.RoomService;
 import org.apache.logging.log4j.LogManager;
@@ -15,23 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-
 
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
+
     protected static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
-    ArrayList<Room> rooms;
-    ArrayList<Personage> persons;
-    RoomService service;
+    RoomService roomService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext context = config.getServletContext();
-        rooms = (ArrayList<Room>) context.getAttribute("rooms");
-        persons = (ArrayList<Personage>) context.getAttribute("persons");
-        service = (RoomService) context.getAttribute("roomService");
+        roomService = (RoomService) context.getAttribute("roomService");
     }
 
     @Override
@@ -46,9 +39,9 @@ public class RoomsServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
 
-        int nextRoomId = service.parseNextRoom(nextRoom);
+        int nextRoomId = roomService.parseNextRoom(nextRoom);
 
-        if (service.checkWin(nextRoomId, user)) {
+        if (roomService.checkWin(nextRoomId, user)) {
             LOGGER.info("user: {} is winner", user.getName());
             response.sendRedirect(request.getContextPath() + "/finish?win=true");
 
@@ -57,8 +50,8 @@ public class RoomsServlet extends HttpServlet {
             LOGGER.debug("New locationId: {} for user: {}", nextRoom, user);
 
             request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("actualRoom", rooms.get(user.getLocationId()));
-            request.getSession().setAttribute("personage", persons.get(user.getLocationId()));
+            request.getSession().setAttribute("actualRoom", roomService.getActualRoom(user));
+            request.getSession().setAttribute("personage", roomService.getActualPersonage(user));
 
             getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }

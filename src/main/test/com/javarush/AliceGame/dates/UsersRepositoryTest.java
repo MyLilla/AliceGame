@@ -40,10 +40,24 @@ class UsersRepositoryTest {
 
     @Spy
     User expectedUser = new User();
+
     @Test
     void getUserObjTest_newUser_added_inRepo() {
         expectedUser.setName("Other");
+        expectedUser.getOpenedDoors().add(3);
+        expectedUser.getOpenedDoors().add(4);
         usersRepository.getUsersRep().put(expectedUser.getName(), expectedUser);
-        assertEquals(expectedUser ,usersRepository.getUserObj("Other"));
+        assertEquals(expectedUser, usersRepository.getUserObj("Other"));
+    }
+
+    @Test
+    void resetProgressTest() {
+
+        user.setLocationId(0);
+        user.getOpenedDoors().add(3);
+        user.getOpenedDoors().add(4);
+        user.setCurrentGame(2);
+
+        assertEquals(user, usersRepository.resetProgress(user));
     }
 }

@@ -36,7 +36,7 @@ class QuestServiceTest {
     User user;
 
     @BeforeEach
-    void init() {
+    void setup() {
         dialog = Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
                         .id(0)

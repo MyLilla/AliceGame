@@ -1,5 +1,6 @@
 package com.javarush.AliceGame.service;
 
+import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.exceptions.RoomException;
@@ -23,10 +24,12 @@ class RoomServiceTest {
     @Spy
     ArrayList<Room> rooms;
     @Mock
+    ArrayList<Personage> personages;
+    @Mock
     RoomService roomService;
 
     @BeforeEach
-    void init() {
+    void setup() {
         room = Room.builder()
                 .id(0)
                 .name("roomName")
@@ -35,7 +38,7 @@ class RoomServiceTest {
                 .openedInvent("invent")
                 .build();
         rooms.add(room.getId(), room);
-        roomService = new RoomService(rooms);
+        roomService = new RoomService(rooms, personages);
     }
 
     @Test

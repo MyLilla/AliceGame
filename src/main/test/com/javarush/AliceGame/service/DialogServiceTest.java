@@ -28,7 +28,7 @@ class DialogServiceTest {
     DialogService dialogService;
 
     @BeforeEach
-    void init() {
+    void setup() {
         dialog = Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
                         .id(0)
@@ -64,7 +64,7 @@ class DialogServiceTest {
     }
 
     @Test
-    void getDialogsTest_positive () {
+    void getDialogsTest_positive() {
         assertEquals(dialogs, dialogService.getDialogs());
     }
 }
