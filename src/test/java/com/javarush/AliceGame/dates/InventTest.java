@@ -1,6 +1,5 @@
 package com.javarush.AliceGame.dates;
 
-import com.javarush.AliceGame.dates.Invent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,17 +25,5 @@ class InventTest {
     @Test
     void getNameTest() {
         assertEquals("Example", invent.getName());
-    }
-
-    @Test
-    void setId() {
-        invent.setId(3);
-        assertEquals(8, invent.getId());
-    }
-
-    @Test
-    void setName() {
-        invent.setName("Other");
-        assertEquals("Other", invent.getName());
     }
 }

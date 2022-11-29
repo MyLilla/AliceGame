@@ -1,10 +1,8 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
-import com.javarush.AliceGame.dates.UsersRepository;
-import com.javarush.AliceGame.servlets.FinishServlet;
+import com.javarush.AliceGame.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

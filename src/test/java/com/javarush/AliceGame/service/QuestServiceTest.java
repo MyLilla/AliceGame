@@ -66,25 +66,25 @@ class QuestServiceTest {
     @Test
     void addInventToUserTest_WhenInventIsNull() {
         assertThrows(InvalidStateException.class,
-                () -> questService.usedInvent(user, null));
+                () -> questService.addInventToUser(user, null));
     }
 
     @Test
     void addInventToUserTest_WhenInventIsEmpty() {
         assertThrows(InvalidStateException.class,
-                () -> questService.usedInvent(user, ""));
+                () -> questService.addInventToUser(user, ""));
     }
 
     @Test
     void addInventToUserTest_WhenUserIsNull() {
         assertThrows(InvalidStateException.class,
-                () -> questService.usedInvent(null, "tool"));
+                () -> questService.addInventToUser(null, "tool"));
     }
 
     @Test
     void addInventToUserTest_WhenBothArgsAreNull() {
         assertThrows(InvalidStateException.class,
-                () -> questService.usedInvent(null, null));
+                () -> questService.addInventToUser(null, null));
     }
 
     @Test
@@ -92,12 +92,6 @@ class QuestServiceTest {
         questService.usedInvent(user, "tool");
         assertTrue(user.getUsedInvents().contains("tool"));
     }
-
-//    @Test
-//    void usedInventTest_PositiveOpenDoors() {
-//
-//    }
-
 
     @Test
     void usedInventTest_WhenInventIsNull() {
@@ -115,6 +109,12 @@ class QuestServiceTest {
     void usedInventTest_WhenBothArgsAreNull() {
         assertThrows(InvalidStateException.class,
                 () -> questService.usedInvent(null, null));
+    }
+
+    @Test
+    void usedInventTest_PositiveOpenDoors() {
+        questService.usedInvent(user,"potion");
+       assertEquals(1, user.getOpenedDoors().size());
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
 import com.javarush.AliceGame.exceptions.RoomException;
-import com.javarush.AliceGame.service.RoomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class RoomServiceTest {
@@ -25,6 +25,8 @@ class RoomServiceTest {
     @Spy
     ArrayList<Room> rooms;
     @Mock
+    Personage personage;
+    @Spy
     ArrayList<Personage> personages;
     @Mock
     RoomService roomService;
@@ -40,11 +42,35 @@ class RoomServiceTest {
                 .build();
         rooms.add(room.getId(), room);
         roomService = new RoomService(rooms, personages);
+
+        personage = Personage.builder()
+                .id(0)
+                .name("personage")
+                .imgPath("img")
+                .build();
+        personages.add(personage);
     }
 
     @Test
     void getRoomsTest_Positive() {
         assertEquals(rooms, roomService.getRooms());
+    }
+
+    @Test
+    void getPersonagesTest() {
+        assertEquals(personage, personages.get(0));
+    }
+
+    @Test
+    void getActualRoomTest() {
+        when(user.getLocationId()).thenReturn(0);
+        assertEquals(room, rooms.get(user.getLocationId()));
+    }
+
+    @Test
+    void getActualPersonageTest() {
+        when(user.getLocationId()).thenReturn(0);
+        assertEquals(personage, personages.get(user.getLocationId()));
     }
 
     @Test

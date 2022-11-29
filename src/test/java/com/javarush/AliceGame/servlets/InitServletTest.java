@@ -1,8 +1,7 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
-import com.javarush.AliceGame.dates.UsersRepository;
-import com.javarush.AliceGame.servlets.InitServlet;
+import com.javarush.AliceGame.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 

@@ -32,22 +32,4 @@ class PersonageTest {
     void getImgPathTest() {
         assertEquals("path", personage.getImgPath());
     }
-
-    @Test
-    void setIdTest() {
-        personage.setId(3);
-        assertEquals(3, personage.getId());
-    }
-
-    @Test
-    void setNameTest() {
-        personage.setName("dog");
-        assertEquals("dog", personage.getName());
-    }
-
-    @Test
-    void setImgPathTest() {
-        personage.setImgPath("way");
-        assertEquals("way", personage.getImgPath());
-    }
 }

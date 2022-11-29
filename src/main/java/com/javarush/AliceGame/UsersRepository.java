@@ -1,5 +1,6 @@
-package com.javarush.AliceGame.dates;
+package com.javarush.AliceGame;
 
+import com.javarush.AliceGame.dates.User;
 import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;

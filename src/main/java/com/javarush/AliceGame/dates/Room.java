@@ -3,7 +3,7 @@ package com.javarush.AliceGame.dates;
 import lombok.*;
 import java.util.List;
 
-@Data
+@Getter
 @AllArgsConstructor
 @Builder
 public class Room {
@@ -13,4 +13,5 @@ public class Room {
     private List<Integer> door;
     private List<String> invents;
     private String openedInvent;
+
 }

@@ -3,6 +3,7 @@
 
     <Appenders>
 
+        <!--change local path here-->
         <RollingFile name="Service" fileName="D:/Projects/AliceGame/src/logs/app.log"
                      filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
             <PatternLayout>
@@ -13,7 +14,7 @@
                 <SizeBasedTriggeringPolicy size="250 MB"/>
             </Policies>
         </RollingFile>
-
+        <!--change local path here-->
         <RollingFile name="Servlet" fileName="D:/Projects/AliceGame/src/logs/web.log"
                      filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
             <PatternLayout>
@@ -24,7 +25,7 @@
                 <SizeBasedTriggeringPolicy size="250 MB"/>
             </Policies>
         </RollingFile>
-
+        <!--change local path here-->
         <RollingFile name="ErrorFile" fileName="D:/Projects/AliceGame/src/logs/error.log"
                      filePattern="logs/error-%d{MM-dd-yyyy}.log.gz">>
             <PatternLayout>
