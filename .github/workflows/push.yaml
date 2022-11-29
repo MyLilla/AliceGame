@@ -16,7 +16,7 @@ jobs:
             java-version: 17
        - name: Start
          run: |
-            echo 'Hello World'
+            echo 'AliceGame'
             pwd
             ls-l
             mvn -version
