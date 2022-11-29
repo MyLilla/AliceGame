@@ -18,7 +18,6 @@ jobs:
          run: |
             echo 'AliceGame'
             pwd
-            ls-l
             mvn -version
        - name: Maven Package
          run: mvn clean install
