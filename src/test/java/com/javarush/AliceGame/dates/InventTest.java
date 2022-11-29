@@ -30,7 +30,7 @@ class InventTest {
 
     @Test
     void setId() {
-        invent.setId(8);
+        invent.setId(3);
         assertEquals(8, invent.getId());
     }
 
