@@ -11,17 +11,10 @@ After initialization, the user gets to the first location (rabbit hole)
 * Available moving between locations
 * Hidden locations can be unlocked by completing a character quest
 
-<h3><a>Project build: </a></h3>
-Maven: 
-```$ mvn clean install```
-<h3 ><a>Project launch:</a></h3>
-Docker:
+<h3 ><a>Deployed app</a></h3>
 
-```$ docker build -t alice .```
+link: https://alicegame.onrender.com
 
-```$ docker run -p 1111:8080 alice```
-
-link: ```localhost:1111/AliceGame-1.0-SNAPSHOT```
 
 <h3 ><a>Class description</a></h3>
 >root of the project:
@@ -41,8 +34,7 @@ also, at the root of the package are classes:
 - ```UserRepository```
 
 >```main/resources``` contain: log4j2.xml
-> 
-! You have to write local path for correct save in th file log4j2.xml
+>
 
 >```src/main/webapp/WEB-INF```:
 - ```dialog.jsp``` - dialogs with personages
@@ -54,7 +46,8 @@ also, at the root of the package are classes:
 
 - Maven
 - UI: JSP, JSTL, Bootstrap, CSS
-- Tests: JUnit5, Mockito, Jacoco
+- Tests: JUnit5, Mockito
 - lib's: apache-commons, lombok
 
-### Examples :
+Test Coverage Jococo:
+![Alt-текст](https://drive.google.com/file/d/1plA16QNU0sUm12jSsH-84SaJ4bT7Wo5R/view?usp=share_link)
