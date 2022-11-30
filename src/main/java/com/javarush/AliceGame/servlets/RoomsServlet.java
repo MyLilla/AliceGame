@@ -1,7 +1,9 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
+import com.javarush.AliceGame.exceptions.InvalidStateException;
 import com.javarush.AliceGame.service.RoomService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,9 +36,9 @@ public class RoomsServlet extends HttpServlet {
         String nextRoom = request.getParameter("nextRoom");
         LOGGER.info("nextRoom = {} for user: {}", nextRoom, user.getName());
 
-        if (nextRoom == null) {
+        if (ObjectUtils.isEmpty(nextRoom)) {
             LOGGER.debug("Parameter: nextRoom is null");
-            getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+            throw new InvalidStateException("Next room can't be null or empty");
         }
 
         int nextRoomId = roomService.parseNextRoom(nextRoom);

@@ -288,7 +288,7 @@ public class GameMap {
         personsDialogs.add(Dialog.builder()
                 .messages(List.of(Dialog.Message.builder()
                         .id(0)
-                        .text("I'm watching you. One creature - one piece of cake")
+                        .text("I'm watching you. \nOne creature - one piece of cake")
                         .build())).build());
 
         LOGGER.debug("DialogMap list size: {}", personsDialogs.size());

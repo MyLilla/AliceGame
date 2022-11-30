@@ -1,6 +1,5 @@
 package com.javarush.AliceGame;
 
-import com.javarush.AliceGame.GameMap;
 import com.javarush.AliceGame.dates.Room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,20 +28,13 @@ class GameMapTest {
     }
 
     @Test
-    void createRoomsTest_Positive() {
+    void createRoomsTest() {
         assertEquals(ArrayList.class, gameMap.createRooms().getClass());
     }
+
     @Test
     void createRoomsTest_RoomsShouldContainRoom() {
         rooms.add(room);
         assertTrue(rooms.contains(room));
-    }
-
-    @Test
-    void createPersonsList() {
-    }
-
-    @Test
-    void createDialogMap() {
     }
 }

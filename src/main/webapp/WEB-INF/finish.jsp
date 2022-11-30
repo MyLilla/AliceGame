@@ -22,7 +22,7 @@
             <a class="btn nextButton" href="${pageContext.request.contextPath}/rooms?nextRoom=0">
                 restart </a>
 
-    </div>
+        </div>
     </div>
 </section>
 </body>

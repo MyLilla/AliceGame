@@ -1,6 +1,5 @@
 package com.javarush.AliceGame.servlets;
 
-import com.javarush.AliceGame.servlets.IndexServlet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

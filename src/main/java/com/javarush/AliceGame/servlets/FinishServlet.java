@@ -1,7 +1,7 @@
 package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.User;
-import com.javarush.AliceGame.UsersRepository;
+import com.javarush.AliceGame.dates.UsersRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +27,7 @@ public class FinishServlet extends HttpServlet {
         ServletContext context = config.getServletContext();
         usersRepository = (UsersRepository) context.getAttribute("usersRepository");
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

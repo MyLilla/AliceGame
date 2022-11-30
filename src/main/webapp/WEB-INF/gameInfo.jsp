@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lilla
-  Date: 21.11.2022
-  Time: 13:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -16,7 +10,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Special+Elite&display=swap"
+          rel="stylesheet">
 </head>
 <script src="${pageContext.request.contextPath}/styles/bootstrap.bundle.min.js"></script>
 
@@ -30,9 +25,9 @@
                 <h1 class="text-center redText">AliceGame</h1>
             </div>
 
-            <div class="col-xl-3">
+            <div class="col-xl-2">
                 <button type="button" class="btn roomButton" data-bs-toggle="modal" data-bs-target="#rulModal">
-                  Rules
+                    Rules
                 </button>
             </div>
 
@@ -56,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-3">
+            <div class="col-xl-2">
                 <button type="button" class="btn roomButton" data-bs-toggle="modal" data-bs-target="#mapModal">
                     GameMap
                 </button>
@@ -71,6 +66,33 @@
                     </div>
                 </div>
             </div>
+
+            <c:if test="${user != null}">
+                <div class="col-xl-2">
+                    <button type="button" class="btn roomButton" data-bs-toggle="modal" data-bs-target="#statistic">
+                        Statistic
+                    </button>
+                </div>
+
+                <div class="modal fade" id="statistic" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">${user.getName()}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body bg-dark text-white">
+                                <ul>
+                                    <li>Count of game: ${user.getCurrentGame()}</li>
+                                    <li>Count users in the game: ${usersRepository.getUsersRep().size()}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
 
         </div>
     </div>

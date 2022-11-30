@@ -28,8 +28,7 @@ class RoomTest {
                 .name("example")
                 .invents(invents)
                 .door(List.of(1))
-                .openedInvent("openInvent")
-                .build();
+                .openedInvent("openInvent").build();
     }
 
     @Test

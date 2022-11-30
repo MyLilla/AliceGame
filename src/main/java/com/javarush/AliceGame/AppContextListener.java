@@ -3,6 +3,7 @@ package com.javarush.AliceGame;
 import com.javarush.AliceGame.dates.Dialog;
 import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
+import com.javarush.AliceGame.dates.UsersRepository;
 import com.javarush.AliceGame.service.DialogService;
 import com.javarush.AliceGame.service.QuestService;
 import com.javarush.AliceGame.service.RoomService;

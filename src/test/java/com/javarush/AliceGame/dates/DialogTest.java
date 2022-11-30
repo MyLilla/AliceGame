@@ -2,6 +2,7 @@ package com.javarush.AliceGame.dates;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -10,6 +11,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DialogTest {
+    @Mock
+    List<Dialog.Message> messages;
+
+    Dialog dialog;
+
+    @BeforeEach
+    void setUp() {
+        dialog = new Dialog(messages);
+    }
+
+    @Test
+    void getMessages() {
+        assertEquals(messages, dialog.getMessages());
+    }
 
     @Test
     void equalsAndHashCodeContract_Dialog() {

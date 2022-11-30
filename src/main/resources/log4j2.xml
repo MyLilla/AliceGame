@@ -39,35 +39,35 @@
 
     </Appenders>
     <Loggers>
-        <Logger name="UsersRepository" level="info" additivity="false">
+        <Logger name="UsersRepository" level="INFO" additivity="true">
             <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="DialogService" level="info" additivity="false">
+        <Logger name="DialogService" level="INFO" additivity="false">
             <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="QuestService" level="info" additivity="false">
+        <Logger name="QuestService" level="INFO" additivity="false">
             <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="RoomService" level="info" additivity="false">
+        <Logger name="RoomService" level="INFO" additivity="false">
             <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="GameMap" level="info" additivity="false">
+        <Logger name="GameMap" level="INFO" additivity="false">
             <AppenderRef ref="Service"/>
         </Logger>
 
-        <Logger name="AppContextListener" level="info" additivity="false">
+        <Logger name="AppContextListener" level="INFO" additivity="false">
             <AppenderRef ref="Servlet"/>
         </Logger>
 
-        <Logger name="DialogServlet" level="info" additivity="false">
+        <Logger name="DialogServlet" level="INFO" additivity="false">
             <AppenderRef ref="Servlet"/>
         </Logger>
 
-        <Logger name="FinishServlet" level="info" additivity="false">
+        <Logger name="FinishServlet" level="INFO" additivity="false">
             <AppenderRef ref="Servlet"/>
         </Logger>
 
@@ -83,7 +83,7 @@
             <AppenderRef ref="Servlet"/>
         </Logger>
 
-        <Root name="RoomsServlet" level="ERROR">
+        <Root level="ERROR">
             <AppenderRef ref="ErrorFile"/>
         </Root>
 

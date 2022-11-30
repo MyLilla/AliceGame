@@ -5,7 +5,6 @@
     --colorLight: #a7925e;
 }
 
-/*Цвета*/
 .colorRed {
     color: var(--colorRed);
 }
@@ -38,6 +37,7 @@ body {
 section {
     padding: 50px 0;
 }
+
 .startButton {
     background-image: url(../img/startBtn.png);
     background-size: cover;
@@ -76,6 +76,7 @@ section {
     height: 58px;
 
 }
+
 .darkButton {
     background: url(../img/buttonDark.png);
     color: var(--bs-white);
@@ -84,6 +85,7 @@ section {
     height: 39px;
 
 }
+
 .chestButton {
     background: url(../img/chest.png);
     background-size: cover;

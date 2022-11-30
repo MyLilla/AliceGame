@@ -53,14 +53,11 @@ class DialogServletTest {
 
     @BeforeEach
     void setup() throws ServletException {
-        when(servletConfig.getServletContext())
-                .thenReturn(context);
+        when(servletConfig.getServletContext()).thenReturn(context);
 
-        when(context.getAttribute(eq("dialogService")))
-                .thenReturn(dialogService);
+        when(context.getAttribute(eq("dialogService"))).thenReturn(dialogService);
 
-        when(request.getSession())
-                .thenReturn(session);
+        when(request.getSession()).thenReturn(session);
 
         dialogServlet = new DialogServlet();
         dialogServlet.init(servletConfig);
@@ -68,8 +65,7 @@ class DialogServletTest {
         personage = Personage.builder()
                 .id(0)
                 .name("whiteRabbit")
-                .imgPath("img/rabbit.png\" width=\"300\" height=\"500")
-                .build();
+                .imgPath("img").build();
 
         nextMess = Dialog.Message.builder()
                 .id(0)
@@ -105,7 +101,6 @@ class DialogServletTest {
     }
 
     @Test
-    @Disabled
     void doGetTest_WhenNextMessageIsEmpty() throws ServletException, IOException {
 
         when(session.getAttribute(eq("personage")))

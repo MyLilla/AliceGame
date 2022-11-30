@@ -1,6 +1,5 @@
 package com.javarush.AliceGame.dates;
 
-import com.javarush.AliceGame.dates.Personage;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,8 +15,7 @@ class PersonageTest {
         personage = Personage.builder()
                 .id(0)
                 .name("cat")
-                .imgPath("path")
-                .build();
+                .imgPath("path").build();
     }
 
     @Test

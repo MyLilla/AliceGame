@@ -106,7 +106,7 @@
                 <br>
                 <ul>
                     <c:forEach var="invent" items="${user.getInvents()}">
-                        <form action="${pageContext.request.contextPath}/quest" >
+                        <form action="${pageContext.request.contextPath}/quest">
                             <div class="text-center btn-lg">
                                 <input type="hidden" name="getInvent" value="${invent}">
                                 <button class="btn nextButton">${invent}</button>

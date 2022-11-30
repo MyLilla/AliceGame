@@ -2,6 +2,7 @@ package com.javarush.AliceGame.servlets;
 
 import com.javarush.AliceGame.dates.*;
 import com.javarush.AliceGame.service.DialogService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,17 +34,18 @@ public class DialogServlet extends HttpServlet {
         String nextMessage = request.getParameter("nextMessage");
         LOGGER.info("dialog with: {}, next message: {}", personage.getName(), nextMessage);
 
-        if (nextMessage.isEmpty()) {
+        if (ObjectUtils.isEmpty(nextMessage)) {
             LOGGER.debug("next message is empty");
             getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        } else {
+
+            Dialog.Message nextMess = dialogService.getMessage(personage, nextMessage);
+            LOGGER.info("get next message: {}", nextMess.getId());
+
+            request.setAttribute("answers", nextMess.getAnswers());
+            request.setAttribute("textQuestion", nextMess.getText());
+
+            getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
         }
-
-        Dialog.Message nextMess = dialogService.getMessage(personage, nextMessage);
-        LOGGER.info("get next message: {}", nextMess.getId());
-
-        request.setAttribute("answers", nextMess.getAnswers());
-        request.setAttribute("textQuestion", nextMess.getText());
-
-        getServletContext().getRequestDispatcher("/WEB-INF/dialog.jsp").forward(request, response);
     }
 }

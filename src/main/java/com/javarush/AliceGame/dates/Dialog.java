@@ -11,7 +11,7 @@ public class Dialog {
 
     private List<Message> messages;
 
-    @Data
+    @Getter
     @Builder
     @EqualsAndHashCode
     public static class Message {
@@ -20,7 +20,7 @@ public class Dialog {
         private List<Answer> answers;
     }
 
-    @Data
+    @Getter
     @Builder
     @EqualsAndHashCode
     public static class Answer {

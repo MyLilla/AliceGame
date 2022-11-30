@@ -52,25 +52,26 @@ class RoomServiceTest {
     }
 
     @Test
-    void getRoomsTest_Positive() {
+    void getRoomsTest() {
         assertEquals(rooms, roomService.getRooms());
     }
 
+
     @Test
     void getPersonagesTest() {
-        assertEquals(personage, personages.get(0));
+        assertEquals(personage, roomService.getPersonages());
     }
 
     @Test
     void getActualRoomTest() {
         when(user.getLocationId()).thenReturn(0);
-        assertEquals(room, rooms.get(user.getLocationId()));
+        assertEquals(room, roomService.getActualRoom(user));
     }
 
     @Test
     void getActualPersonageTest() {
         when(user.getLocationId()).thenReturn(0);
-        assertEquals(personage, personages.get(user.getLocationId()));
+        assertEquals(personage, roomService.getActualPersonage(user));
     }
 
     @Test

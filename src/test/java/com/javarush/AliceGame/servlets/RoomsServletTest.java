@@ -3,10 +3,9 @@ package com.javarush.AliceGame.servlets;
 import com.javarush.AliceGame.dates.Personage;
 import com.javarush.AliceGame.dates.Room;
 import com.javarush.AliceGame.dates.User;
+import com.javarush.AliceGame.exceptions.InvalidStateException;
 import com.javarush.AliceGame.service.RoomService;
-import com.javarush.AliceGame.servlets.RoomsServlet;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -22,6 +21,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -70,6 +70,8 @@ class RoomsServletTest {
 
         when(session.getAttribute(eq("user")))
                 .thenReturn(user);
+        when(request.getParameter("nextRoom"))
+                .thenReturn("1");
 
         when(context.getRequestDispatcher(eq("/WEB-INF/index.jsp")))
                 .thenReturn(requestDispatcher);
@@ -86,46 +88,31 @@ class RoomsServletTest {
         verify(request.getSession(), times(1))
                 .setAttribute(eq("personage"), eq(personage));
 
-        verify(requestDispatcher, times(2))
-                .forward(request, response);
-    }
-
-    @Test
-    @Disabled
-    // почему не работают
-    void doGetTest_WhenNextRoomIsNull() throws ServletException, IOException {
-
-        when(session.getAttribute(eq("user")))
-                .thenReturn(user);
-
-        // говорю, что сообщение будет нал
-        when(session.getAttribute("nextRoom")).thenReturn(null);
-
-        System.out.println(session.getAttribute("name"));
-
-        when(context.getRequestDispatcher(eq("/WEB-INF/index.jsp")))
-                .thenReturn(requestDispatcher);
-
-        //запускаю, и должна же попасть в ветку nextRoom=null
-        roomsServlet.doGet(request, response);
-
-        // говорит, что было 2 перехода, а не один
         verify(requestDispatcher, times(1))
                 .forward(request, response);
     }
 
     @Test
-    @Disabled
-    // пытается обращаться к RequestDispatcher
+    void doGetTest_WhenNextRoomIsNull() {
+
+        when(session.getAttribute(eq("user")))
+                .thenReturn(user);
+
+        assertThrows(InvalidStateException.class,
+                () -> roomsServlet.doGet(request, response));
+    }
+
+    @Test
     void doGetTest_WhenWin() throws ServletException, IOException {
 
         when(session.getAttribute(eq("user")))
                 .thenReturn(user);
-        when(session.getAttribute("nextRoom"))
-                .thenReturn("0");
-        // хотя тут указывается, что условие перехода по redirect == true
+        when(request.getParameter("nextRoom"))
+                .thenReturn("1");
+
         when(roomsService.checkWin(0, user))
                 .thenReturn(true);
+
         when(request.getContextPath()).thenReturn("path");
 
         roomsServlet.doGet(request, response);
