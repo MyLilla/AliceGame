@@ -49,5 +49,5 @@ also, at the root of the package are classes:
 - Tests: JUnit5, Mockito
 - lib's: apache-commons, lombok
 
-Test Coverage Jococo:
+Test Coverage Jacoco:
 ![Alt-текст](https://drive.google.com/file/d/1plA16QNU0sUm12jSsH-84SaJ4bT7Wo5R/view?usp=share_link)
