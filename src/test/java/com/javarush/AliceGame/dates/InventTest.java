@@ -1,5 +1,7 @@
 package com.javarush.AliceGame.dates;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,5 +27,13 @@ class InventTest {
     @Test
     void getNameTest() {
         assertEquals("Example", invent.getName());
+    }
+
+    @Test
+    void equalsAndHashCodeContractTest() {
+        EqualsVerifier.simple()
+                .forClass(Invent.class)
+                .suppress(Warning.INHERITED_DIRECTLY_FROM_OBJECT)
+                .verify();
     }
 }

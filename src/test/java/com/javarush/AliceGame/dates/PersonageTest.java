@@ -1,6 +1,8 @@
 package com.javarush.AliceGame.dates;
 
 import com.javarush.AliceGame.dates.Personage;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +33,13 @@ class PersonageTest {
     @Test
     void getImgPathTest() {
         assertEquals("path", personage.getImgPath());
+    }
+
+    @Test
+    void equalsAndHashCodeContractTest() {
+        EqualsVerifier.simple()
+                .forClass(Personage.class)
+                .suppress(Warning.INHERITED_DIRECTLY_FROM_OBJECT)
+                .verify();
     }
 }

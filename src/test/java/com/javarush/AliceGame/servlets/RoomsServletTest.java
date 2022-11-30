@@ -97,8 +97,11 @@ class RoomsServletTest {
 
         when(session.getAttribute(eq("user")))
                 .thenReturn(user);
+
         // говорю, что сообщение будет нал
         when(session.getAttribute("nextRoom")).thenReturn(null);
+
+        System.out.println(session.getAttribute("name"));
 
         when(context.getRequestDispatcher(eq("/WEB-INF/index.jsp")))
                 .thenReturn(requestDispatcher);

@@ -1,5 +1,6 @@
 package com.javarush.AliceGame.dates;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 @Getter
 @Setter
+@EqualsAndHashCode
 public class User {
 
     private String name;

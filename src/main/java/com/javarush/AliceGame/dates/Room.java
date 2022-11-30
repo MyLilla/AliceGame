@@ -6,6 +6,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class Room {
 
     private Integer id;
@@ -13,5 +14,4 @@ public class Room {
     private List<Integer> door;
     private List<String> invents;
     private String openedInvent;
-
 }

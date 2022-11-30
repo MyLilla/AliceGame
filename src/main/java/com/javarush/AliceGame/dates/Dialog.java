@@ -1,15 +1,19 @@
 package com.javarush.AliceGame.dates;
 
 import lombok.*;
+
 import java.util.List;
 
-@Data
+@Getter
 @Builder
+@EqualsAndHashCode
 public class Dialog {
 
     private List<Message> messages;
+
     @Data
     @Builder
+    @EqualsAndHashCode
     public static class Message {
         Integer id;
         String text;
@@ -18,6 +22,7 @@ public class Dialog {
 
     @Data
     @Builder
+    @EqualsAndHashCode
     public static class Answer {
         String text;
         Integer nextQuestion;
