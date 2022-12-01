@@ -12,8 +12,19 @@ After initialization, the user gets to the first location (rabbit hole)
 * Hidden locations can be unlocked by completing a character quest
 
 <h3 ><a>Deployed app</a></h3>
-
 link: https://alicegame.onrender.com
+
+<h3><a>Building: </a></h3>
+Maven:
+```$ mvn clean install```
+<h3 ><a>Launch:</a></h3>
+Docker:
+
+```$ docker build -t alice .```
+
+```$ docker run -p 1111:8080 alice```
+
+link: ```localhost:8080/AliceGame_war_exploded```
 
 
 <h3 ><a>Class description</a></h3>
@@ -50,4 +61,4 @@ also, at the root of the package are classes:
 - lib's: apache-commons, lombok
 
 Test Coverage Jacoco:
-![Alt-текст](https://drive.google.com/file/d/1plA16QNU0sUm12jSsH-84SaJ4bT7Wo5R/view?usp=share_link)
+![Alt-result](https://drive.google.com/file/d/1plA16QNU0sUm12jSsH-84SaJ4bT7Wo5R/view?usp=share_link "coverage")

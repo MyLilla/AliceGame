@@ -86,6 +86,7 @@
                             <div class="modal-body bg-dark text-white">
                                 <ul>
                                     <li>Count of game: ${user.getCurrentGame()}</li>
+                                    <br><br>
                                     <li>Count users in the game: ${usersRepository.getUsersRep().size()}</li>
                                 </ul>
                             </div>
