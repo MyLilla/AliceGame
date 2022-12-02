@@ -93,6 +93,12 @@ class RoomServiceTest {
     }
 
     @Test
+    void parseNextRoomTest_WhenNextRoomIsNotNumber() {
+        assertThrows(RoomException.class,
+                () -> roomService.parseNextRoom("notNumber"));
+    }
+
+    @Test
     void checkWinTest_WhenUserIsWin_True() {
         user.getOpenedDoors().add(0);
         user.getOpenedDoors().add(1);

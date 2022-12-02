@@ -59,4 +59,4 @@ also, at the root of the package are classes:
 - lib's: apache-commons, lombok
 
 Test Coverage Jacoco:
-![Alt-result](https://drive.google.com/file/d/1plA16QNU0sUm12jSsH-84SaJ4bT7Wo5R/view?usp=share_link "coverage")
+![Alt-coverage](https://drive.google.com/file/d/1plA16QNU0sUm12jSsH-84SaJ4bT7Wo5R/view?usp=share_link" "coverage")
