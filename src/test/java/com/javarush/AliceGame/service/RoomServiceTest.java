@@ -30,6 +30,8 @@ class RoomServiceTest {
     ArrayList<Personage> personages;
     @Mock
     RoomService roomService;
+    @Spy
+    User user;
 
     @BeforeEach
     void setup() {
@@ -55,7 +57,6 @@ class RoomServiceTest {
     void getRoomsTest() {
         assertEquals(rooms, roomService.getRooms());
     }
-
 
     @Test
     void getPersonagesTest() {
@@ -90,9 +91,6 @@ class RoomServiceTest {
     void parseNextRoomTest_WhenNextRoomCorrect() {
         assertEquals(0, roomService.parseNextRoom("0"));
     }
-
-    @Spy
-    User user;
 
     @Test
     void checkWinTest_WhenUserIsWin_True() {

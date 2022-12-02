@@ -38,13 +38,13 @@ public class InitServlet extends HttpServlet {
         if (user == null) {
             LOGGER.debug("User is null after create");
             getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        } else {
+
+            LOGGER.info("got user: {}", user);
+            session.setAttribute("user", user);
+            LOGGER.info("user {} saved in session {} ", user, request.getSession());
+
+            response.sendRedirect(request.getContextPath() + "/rooms?nextRoom=0");
         }
-
-        LOGGER.info("got user with id: {}", user.getId());
-
-        session.setAttribute("user", user);
-        LOGGER.info("user {} saved in session {} ", user, request.getSession());
-
-        response.sendRedirect(request.getContextPath() + "/rooms?nextRoom=0");
     }
 }

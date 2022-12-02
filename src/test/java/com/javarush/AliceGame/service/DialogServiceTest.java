@@ -47,12 +47,6 @@ class DialogServiceTest {
     }
 
     @Test
-    void getMessageTest_whenPersonageIsNull() {
-        assertThrows(NumberFormatException.class,
-                () -> dialogService.getMessage(null, "next"));
-    }
-
-    @Test
     void getMessageTest() {
         Dialog.Message expected = Dialog.Message.builder()
                 .id(0)
