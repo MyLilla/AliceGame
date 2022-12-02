@@ -18,8 +18,8 @@ import java.io.IOException;
 @WebServlet(name = "QuestServlet", value = "/quest")
 public class QuestServlet extends HttpServlet {
 
-    protected static final Logger LOGGER = LogManager.getLogger(QuestServlet.class);
-    QuestService questService;
+    private static final Logger LOGGER = LogManager.getLogger(QuestServlet.class);
+    private QuestService questService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

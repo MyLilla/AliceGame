@@ -13,9 +13,9 @@ import java.util.List;
 @Getter
 public class GameMap {
 
-    protected static final Logger LOGGER = LogManager.getLogger(GameMap.class);
+    private static final Logger LOGGER = LogManager.getLogger(GameMap.class);
 
-    public ArrayList<Room> createRooms() {
+    public List<Room> createRooms() {
 
         ArrayList<Room> rooms = new ArrayList<>();
 
@@ -96,10 +96,10 @@ public class GameMap {
         rooms.add(london.getId(), london);
 
         LOGGER.debug("Rooms list size: {}", rooms.size());
-        return rooms;
+        return List.copyOf(rooms);
     }
 
-    public ArrayList<Personage> createPersonsList() {
+    public List<Personage> createPersonsList() {
 
         ArrayList<Personage> personages = new ArrayList<>();
 
@@ -146,10 +146,10 @@ public class GameMap {
                 .build());
 
         LOGGER.debug("Persons list size: {}", personages.size());
-        return personages;
+        return List.copyOf(personages);
     }
 
-    public ArrayList<Dialog> createDialogMap() {
+    public List<Dialog> createDialogMap() {
 
         ArrayList<Dialog> personsDialogs = new ArrayList<>();
 
@@ -292,6 +292,6 @@ public class GameMap {
                         .build())).build());
 
         LOGGER.debug("DialogMap list size: {}", personsDialogs.size());
-        return personsDialogs;
+        return List.copyOf(personsDialogs);
     }
 }

@@ -17,9 +17,9 @@ import java.io.IOException;
 
 @WebServlet(name = "FinishServlet", value = "/finish")
 public class FinishServlet extends HttpServlet {
-    protected static final Logger LOGGER = LogManager.getLogger(FinishServlet.class);
+    private static final Logger LOGGER = LogManager.getLogger(FinishServlet.class);
 
-    UsersRepository usersRepository;
+    private UsersRepository usersRepository;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -32,10 +32,10 @@ public class FinishServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute("user");
-        LOGGER.info("user: {} finished game", user);
+        LOGGER.info("user with id: {} finished game", user.getId());
 
         usersRepository.resetProgress(user);
-        LOGGER.info("user: {} cleaning result, current game = {}", user, user.getCurrentGame());
+        LOGGER.info("for user with id: {} cleaned result, current game = {}", user.getId(), user.getCurrentGame());
 
         request.getSession().setAttribute("user", user);
 

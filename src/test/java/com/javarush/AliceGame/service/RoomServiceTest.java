@@ -59,7 +59,7 @@ class RoomServiceTest {
 
     @Test
     void getPersonagesTest() {
-        assertEquals(personage, roomService.getPersonages());
+        assertEquals(personages, roomService.getPersonages());
     }
 
     @Test
@@ -89,13 +89,6 @@ class RoomServiceTest {
     @Test
     void parseNextRoomTest_WhenNextRoomCorrect() {
         assertEquals(0, roomService.parseNextRoom("0"));
-    }
-
-    @Test
-    void getFinishRoomIdTest_Positive() {
-        rooms.add(room);
-        rooms.add(room);
-        assertEquals(2, roomService.getFinishRoomId());
     }
 
     @Spy

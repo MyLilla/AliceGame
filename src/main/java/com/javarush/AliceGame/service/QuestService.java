@@ -10,17 +10,17 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 public class QuestService {
-    protected static final Logger LOGGER = LogManager.getLogger(QuestService.class);
+    private static final Logger LOGGER = LogManager.getLogger(QuestService.class);
 
-    private final ArrayList<Room> rooms;
-    private final ArrayList<Dialog> dialogs;
+    private final List<Room> rooms;
+    private final List<Dialog> dialogs;
 
-    public QuestService(ArrayList<Room> rooms, ArrayList<Dialog> dialogs) {
+    public QuestService(List<Room> rooms, List<Dialog> dialogs) {
         this.rooms = rooms;
         this.dialogs = dialogs;
         LOGGER.debug("QuestService created");
@@ -28,12 +28,12 @@ public class QuestService {
 
     public void addInventToUser(User user, String invent) {
         if (ObjectUtils.isEmpty(invent)) {
-            LOGGER.error("invent is null or empty");
-            throw new InvalidStateException("Invent can't be null or empty");
+            LOGGER.error("invent is null or empty. Value: '{}'", invent);
+            throw new InvalidStateException("Invent can't be null or empty" + invent);
         }
         if (user == null) {
-            LOGGER.error("user is null or empty");
-            throw new InvalidStateException("user can't be null or empty");
+            LOGGER.error("user is null");
+            throw new InvalidStateException("user can't be null");
         }
 
         if (!(user.getInvents().contains(invent))) {
@@ -45,12 +45,12 @@ public class QuestService {
     public void usedInvent(User user, String invent) {
 
         if (ObjectUtils.isEmpty(invent)) {
-            LOGGER.error("invent is null or empty");
-            throw new InvalidStateException("invent can't be null or empty");
+            LOGGER.error("invent is null or empty. Value: '{}'", invent);
+            throw new InvalidStateException("invent can't be null or empty. Value: '" + invent + "'");
         }
         if (user == null) {
-            LOGGER.error("user is null or empty");
-            throw new InvalidStateException("user can't be null or empty");
+            LOGGER.error("user is null");
+            throw new InvalidStateException("user can't be null");
         }
 
         user.getInvents().remove(invent);

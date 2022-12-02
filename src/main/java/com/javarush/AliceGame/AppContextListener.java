@@ -14,11 +14,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.util.ArrayList;
+import java.util.List;
 
 @WebListener
 public class AppContextListener implements ServletContextListener {
-    protected static final Logger LOGGER = LogManager.getLogger(AppContextListener.class);
+    private static final Logger LOGGER = LogManager.getLogger(AppContextListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -29,15 +29,15 @@ public class AppContextListener implements ServletContextListener {
         GameMap game = new GameMap();
         LOGGER.info("created GameMap: {}", game);
 
-        ArrayList<Personage> persons = game.createPersonsList();
+        List<Personage> persons = game.createPersonsList();
         context.setAttribute("persons", persons);
         LOGGER.info("persons list: {} created and added to context like: \"persons\"", persons);
 
-        ArrayList<Dialog> dialogs = game.createDialogMap();
+        List<Dialog> dialogs = game.createDialogMap();
         context.setAttribute("dialogs", dialogs);
         LOGGER.info("dialogs list: {} created and added to context like: \"dialogs\"", dialogs);
 
-        ArrayList<Room> rooms = game.createRooms();
+        List<Room> rooms = game.createRooms();
         context.setAttribute("rooms", rooms);
         LOGGER.info("dialogs rooms: {} created and added to context like: \"rooms\"", rooms);
 

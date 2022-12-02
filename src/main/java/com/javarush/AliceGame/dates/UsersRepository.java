@@ -6,16 +6,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Getter
 public class UsersRepository {
-    protected static final Logger LOGGER = LogManager.getLogger(UsersRepository.class);
+    private static final Logger LOGGER = LogManager.getLogger(UsersRepository.class);
+    private final List <Integer> START_OPENED_ROOMS = List.of(3, 4);
     private final HashMap<String, User> usersRep = new HashMap<>();
+    private int countUserId = 0;
 
     public User getUserObj(String userName) {
 
         if (ObjectUtils.isEmpty(userName)) {
-            LOGGER.debug("user name is empty or null");
+            LOGGER.debug("user name is empty or null. Value: '{}'", userName);
             return null;
         }
 
@@ -24,10 +27,11 @@ public class UsersRepository {
             return usersRep.get(userName);
         }
         User user = new User();
+        countUserId++;
+        user.setId(countUserId);
         user.setName(userName);
-        user.getOpenedDoors().add(3);
-        user.getOpenedDoors().add(4);
-        LOGGER.info("Created new user: {}, name: {}, doors: {}", user, user.getName(), user.getOpenedDoors());
+        user.getOpenedDoors().addAll(START_OPENED_ROOMS);
+        LOGGER.info("Created new user. id: {}, doors: {}",user.getId(), user.getOpenedDoors());
 
         usersRep.put(userName, user);
         return user;
@@ -39,10 +43,9 @@ public class UsersRepository {
         user.getInvents().clear();
         user.getUsedInvents().clear();
         user.getOpenedDoors().clear();
-        user.getOpenedDoors().add(3);
-        user.getOpenedDoors().add(4);
+        user.getOpenedDoors().addAll(START_OPENED_ROOMS);
         user.setCurrentGame(user.getCurrentGame() + 1);
-        LOGGER.info("user: {} cleaning result, current game = {}", user, user.getCurrentGame());
+        LOGGER.info("for user id: {} cleaning result, current game = {}", user.getId(), user.getCurrentGame());
 
         return user;
     }

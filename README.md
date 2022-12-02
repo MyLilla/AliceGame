@@ -15,16 +15,14 @@ After initialization, the user gets to the first location (rabbit hole)
 link: https://alicegame.onrender.com
 
 <h3><a>Building: </a></h3>
-Maven:
-```$ mvn clean install```
-<h3 ><a>Launch:</a></h3>
-Docker:
 
 ```$ docker build -t alice .```
 
+<h3 ><a>Launch:</a></h3>
+
 ```$ docker run -p 1111:8080 alice```
 
-link: ```localhost:8080/AliceGame_war_exploded```
+link: ```localhost:1111/Alice```
 
 
 <h3 ><a>Class description</a></h3>

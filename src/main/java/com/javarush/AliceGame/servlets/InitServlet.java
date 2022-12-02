@@ -17,8 +17,8 @@ import java.io.IOException;
 
 @WebServlet(name = "InitServlet", value = "/init")
 public class InitServlet extends HttpServlet {
-    protected static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
-    UsersRepository usersRepository;
+    private static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
+    private UsersRepository usersRepository;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -31,15 +31,16 @@ public class InitServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(true);
-        LOGGER.debug("create new session: {}", session.getId());
+        LOGGER.debug("create new session. id: {}", session.getId());
 
         User user = usersRepository.getUserObj(request.getParameter("name"));
-        LOGGER.info("got user: {}", user);
 
         if (user == null) {
             LOGGER.debug("User is null after create");
             getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
+
+        LOGGER.info("got user with id: {}", user.getId());
 
         session.setAttribute("user", user);
         LOGGER.info("user {} saved in session {} ", user, request.getSession());

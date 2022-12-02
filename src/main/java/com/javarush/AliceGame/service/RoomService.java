@@ -10,17 +10,17 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 public class RoomService {
-    protected static final Logger LOGGER = LogManager.getLogger(RoomService.class);
-    private final ArrayList<Room> rooms;
-    private final ArrayList<Personage> personages;
+    private static final Logger LOGGER = LogManager.getLogger(RoomService.class);
+    private final List<Room> rooms;
+    private final List<Personage> personages;
 
-    public RoomService(ArrayList<Room> rooms, ArrayList<Personage> personages) {
+    public RoomService(List<Room> rooms, List<Personage> personages) {
         this.rooms = rooms;
         this.personages = personages;
         LOGGER.info("Created RoomService");
@@ -37,13 +37,18 @@ public class RoomService {
     public int parseNextRoom(String nextRoom) {
 
         if (ObjectUtils.isEmpty(nextRoom)) {
-            LOGGER.error("next room is null or empty");
-            throw new RoomException("next room is null or empty");
+            LOGGER.error("next room is null or empty. Value: '{}'", nextRoom);
+            throw new RoomException("next room is null or empty. Value: '" + nextRoom + "'");
         }
-        return Integer.parseInt(nextRoom);
+        try {
+            return Integer.parseInt(nextRoom);
+        } catch (NumberFormatException exception) {
+            LOGGER.error("next room is not number. Value: {}", nextRoom);
+            throw new RoomException("next room is not number. Value: " + nextRoom + exception.getMessage());
+        }
     }
 
-    public Integer getFinishRoomId() {
+    private Integer getFinishRoomId() {
         return rooms.size() - 1;
     }
 
@@ -55,7 +60,7 @@ public class RoomService {
             LOGGER.debug("Objects {} equals {}", nextRoomId, finishRoom);
 
             int openedDoors = user.getOpenedDoors().size();
-            LOGGER.debug("opened doors: {}  finished doors: {}", openedDoors, rooms.size());
+            LOGGER.debug("opened doors: {} finished doors: {}", openedDoors, rooms.size());
 
             return openedDoors + 1 == rooms.size();
         }

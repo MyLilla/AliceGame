@@ -14,7 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
-        <junit.version>5.9.0</junit.version>
     </properties>
 
     <dependencies>
@@ -86,6 +85,7 @@
     </dependencies>
 
     <build>
+        <finalName>Alice</finalName>
         <plugins>
 
             <plugin>

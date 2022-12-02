@@ -19,8 +19,8 @@ import java.io.IOException;
 @WebServlet(name = "RoomsServlet", value = "/rooms")
 public class RoomsServlet extends HttpServlet {
 
-    protected static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
-    RoomService roomService;
+    private static final Logger LOGGER = LogManager.getLogger(RoomsServlet.class);
+    private RoomService roomService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

@@ -17,8 +17,8 @@ import java.io.IOException;
 
 @WebServlet(name = "DialogServlet", value = "/dialog")
 public class DialogServlet extends HttpServlet {
-    protected static final Logger LOGGER = LogManager.getLogger(DialogServlet.class);
-    DialogService dialogService;
+    private static final Logger LOGGER = LogManager.getLogger(DialogServlet.class);
+    private DialogService dialogService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
