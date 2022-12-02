@@ -8,6 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -96,7 +98,7 @@ public class GameMap {
         rooms.add(london.getId(), london);
 
         LOGGER.debug("Rooms list size: {}", rooms.size());
-        return List.copyOf(rooms);
+        return Collections.unmodifiableList(rooms);
     }
 
     public List<Personage> createPersonsList() {
@@ -146,7 +148,7 @@ public class GameMap {
                 .build());
 
         LOGGER.debug("Persons list size: {}", personages.size());
-        return List.copyOf(personages);
+        return Collections.unmodifiableList(personages);
     }
 
     public List<Dialog> createDialogMap() {
@@ -292,6 +294,6 @@ public class GameMap {
                         .build())).build());
 
         LOGGER.debug("DialogMap list size: {}", personsDialogs.size());
-        return List.copyOf(personsDialogs);
+        return Collections.unmodifiableList(personsDialogs);
     }
 }
