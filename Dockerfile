@@ -4,4 +4,4 @@ RUN mvn clean package
 
 FROM tomcat:9-jdk17-corretto
 
-COPY --from=MAVEN_BUILD /target/Alice.war /usr/local/tomcat/webapps/
+COPY --from=MAVEN_BUILD /target/ROOT.war /usr/local/tomcat/webapps/
