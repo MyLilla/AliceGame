@@ -22,7 +22,7 @@ link: https://alicegame.onrender.com
 
 ```$ docker run -p 1111:8080 alice```
 
-link: ```localhost:1111/Alice```
+link: ```localhost:1111```
 
 
 <h3 ><a>Class description</a></h3>
