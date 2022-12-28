@@ -1,0 +1,96 @@
+:root {
+    --colorRed: #971717;
+    --colorMid: #32302e;
+    --colorDark: #201b12;
+    --colorLight: #a7925e;
+}
+
+.colorRed {
+    color: var(--colorRed);
+}
+
+.colorText {
+    color: var(--colorLight);
+    font-family: 'Reenie Beanie', cursive;
+    font-family: 'Special Elite', cursive;
+}
+
+.redText {
+    color: var(--colorRed);
+    font-family: 'Reenie Beanie', cursive;
+}
+
+header {
+    padding: 25px 0;
+    background: var(--colorDark);
+    background: -moz-linear-gradient(left, var(--colorDark) 0%, var(--colorMid) 31%, var(--colorDark) 100%);
+    background: -webkit-linear-gradient(left, var(--colorDark) 0%, var(--colorMid) 31%, var(--colorDark) 100%);
+    background: linear-gradient(to right, var(--colorDark) 0%, var(--colorMid) 31%, var(--colorDark) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#201b12', endColorstr='#201b12', GradientType=1);
+}
+
+body {
+    background: url(../img/fon.jpg);
+    background-size: cover;
+}
+
+section {
+    padding: 50px 0;
+}
+
+.startButton {
+    background-image: url(../img/startBtn.png);
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    margin: 30px auto;
+    transition: all 0.2s ease;
+}
+
+.startButton:hover {
+    width: 130px;
+    height: 130px;
+}
+
+.nextButton {
+    background-color: var(--colorLight);
+    display: block;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 10px 30px;
+    color: var(--bs-white);
+}
+
+.nextButton:hover {
+    color: var(--bs-white);
+    background-color: var(--colorRed);
+}
+
+.roomButton {
+    background: url(../img/button.png);
+    color: var(--bs-white);
+    background-size: cover;
+    width: 200px;
+    height: 58px;
+
+}
+
+.darkButton {
+    background: url(../img/buttonDark.png);
+    color: var(--bs-white);
+    background-size: cover;
+    width: 174px;
+    height: 39px;
+
+}
+
+.chestButton {
+    background: url(../img/chest.png);
+    background-size: cover;
+    width: 170px;
+    height: 136px;
+
+}
+

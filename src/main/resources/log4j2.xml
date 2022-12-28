@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="AliceGame" packages="">
+
+    <Appenders>
+
+        <!--change local path here-->
+        <RollingFile name="Service" fileName="/logs/app.log"
+                     filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+        <!--change local path here-->
+        <RollingFile name="Servlet" fileName="/logs/web.log"
+                     filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">>
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+        <!--change local path here-->
+        <RollingFile name="ErrorFile" fileName="/logs/error.log"
+                     filePattern="logs/error-%d{MM-dd-yyyy}.log.gz">>
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="com.javarush.AliceGame.service" level="INFO">
+            <AppenderRef ref="Service"/>
+        </Logger>
+        <Logger name="com.javarush.AliceGame.GameMap.java" level="INFO">
+            <AppenderRef ref="Service"/>
+        </Logger>
+        <Logger name="com.javarush.AliceGame.UsersRepository.java" level="INFO">
+            <AppenderRef ref="Service"/>
+        </Logger>
+
+        <Logger name="com.javarush.AliceGame.servlets" level="INFO" >
+            <AppenderRef ref="Servlet"/>
+        </Logger>
+
+        <Root level="ERROR">
+            <AppenderRef ref="ErrorFile"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
