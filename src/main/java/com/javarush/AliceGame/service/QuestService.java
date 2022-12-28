@@ -27,14 +27,7 @@ public class QuestService {
     }
 
     public void addInventToUser(User user, String invent) {
-        if (ObjectUtils.isEmpty(invent)) {
-            LOGGER.error("invent is null or empty. Value: '{}'", invent);
-            throw new InvalidStateException("Invent can't be null or empty" + invent);
-        }
-        if (user == null) {
-            LOGGER.error("user is null");
-            throw new InvalidStateException("user can't be null");
-        }
+        checkUser(user, invent);
 
         if (!(user.getInvents().contains(invent))) {
             user.getInvents().add(invent);
@@ -43,21 +36,24 @@ public class QuestService {
     }
 
     public void usedInvent(User user, String invent) {
-
-        if (ObjectUtils.isEmpty(invent)) {
-            LOGGER.error("invent is null or empty. Value: '{}'", invent);
-            throw new InvalidStateException("invent can't be null or empty. Value: '" + invent + "'");
-        }
-        if (user == null) {
-            LOGGER.error("user is null");
-            throw new InvalidStateException("user can't be null");
-        }
+        checkUser(user, invent);
 
         user.getInvents().remove(invent);
         user.getUsedInvents().add(invent);
         LOGGER.info("{} - was used", invent);
 
         openDoors(user, invent);
+    }
+
+    private void checkUser(User user, String invent) {
+        if (ObjectUtils.isEmpty(invent)) {
+            LOGGER.error("invent is null or empty. Value: '{}'", invent);
+            throw new InvalidStateException("Invent can't be null or empty. Value: '" + invent + "'");
+        }
+        if (user == null) {
+            LOGGER.error("user is null");
+            throw new InvalidStateException("user can't be null");
+        }
     }
 
     private void openDoors(User user, String invent) {

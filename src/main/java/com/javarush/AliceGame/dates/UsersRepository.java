@@ -15,7 +15,7 @@ public class UsersRepository {
     private final HashMap<String, User> usersRep = new HashMap<>();
     private int countUserId = 0;
 
-    public User getUserObj(String userName) {
+    public User fetchUserByUsername (String userName) {
 
         if (ObjectUtils.isEmpty(userName)) {
             LOGGER.debug("user name is empty or null. Value: '{}'", userName);

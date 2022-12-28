@@ -64,7 +64,7 @@ class InitServletTest {
 
         when(request.getParameter("name"))
                 .thenReturn("name");
-        when(usersRepository.getUserObj("name"))
+        when(usersRepository.fetchUserByUsername("name"))
                 .thenReturn(user);
         when(request.getContextPath())
                 .thenReturn("path");
@@ -84,7 +84,7 @@ class InitServletTest {
 
         when(request.getParameter("name"))
                 .thenReturn("name");
-        when(usersRepository.getUserObj("name"))
+        when(usersRepository.fetchUserByUsername("name"))
                 .thenReturn(null);
 
         when(context.getRequestDispatcher(eq("/WEB-INF/index.jsp")))

@@ -43,7 +43,6 @@ also, at the root of the package are classes:
 - ```UserRepository```
 
 >```main/resources``` contain: log4j2.xml
->
 
 >```src/main/webapp/WEB-INF```:
 - ```dialog.jsp``` - dialogs with personages

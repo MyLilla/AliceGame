@@ -33,7 +33,7 @@ public class InitServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         LOGGER.debug("create new session. id: {}", session.getId());
 
-        User user = usersRepository.getUserObj(request.getParameter("name"));
+        User user = usersRepository.fetchUserByUsername(request.getParameter("name"));
 
         if (user == null) {
             LOGGER.debug("User is null after create");

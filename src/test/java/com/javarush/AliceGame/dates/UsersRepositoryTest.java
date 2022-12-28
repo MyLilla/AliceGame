@@ -24,17 +24,17 @@ class UsersRepositoryTest {
 
     @Test
     void getUserObjTest_When_users_contain_userName() {
-        assertEquals(user, usersRepository.getUserObj("Name"));
+        assertEquals(user, usersRepository.fetchUserByUsername("Name"));
     }
 
     @Test
     void getUserObjTest_if_userName_isEmpty() {
-        assertEquals(null, usersRepository.getUserObj(""));
+        assertEquals(null, usersRepository.fetchUserByUsername(""));
     }
 
     @Test
     void getUserObjTest_if_userName_is_null() {
-        assertEquals(null, usersRepository.getUserObj(null));
+        assertEquals(null, usersRepository.fetchUserByUsername(null));
     }
 
     @Spy
@@ -46,7 +46,7 @@ class UsersRepositoryTest {
         expectedUser.getOpenedDoors().add(3);
         expectedUser.getOpenedDoors().add(4);
         usersRepository.getUsersRep().put(expectedUser.getName(), expectedUser);
-        assertEquals(expectedUser, usersRepository.getUserObj("Other"));
+        assertEquals(expectedUser, usersRepository.fetchUserByUsername("Other"));
     }
 
     @Test
