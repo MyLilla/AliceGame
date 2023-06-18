@@ -26,6 +26,7 @@ link: ```localhost:1111```
 
 
 <h3 ><a>Class description</a></h3>
+
 >root of the project:
 - ```main``` - application code directory
 -  ```test``` - test code directory
