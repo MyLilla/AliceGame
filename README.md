@@ -1,6 +1,8 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=435&lines=Alice+Game)](https://git.io/typing-svg)
 <h2><a>Web game application with quests</a></h2>
 
+Fourth project in the JavaRush course
+
 After initialization, the user gets to the first location (rabbit hole)
 
 >The goal of the game is to reach the final location (London)
